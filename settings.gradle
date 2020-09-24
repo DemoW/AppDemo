@@ -1,2 +1,3 @@
-include ':app'
 rootProject.name = "AppDemo"
+include ':common'
+include ':app'

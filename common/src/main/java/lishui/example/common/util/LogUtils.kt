@@ -1,10 +1,10 @@
-package lishui.example.app.utils
+package lishui.example.common.util
 
 import android.util.Log
 
 object LogUtils {
 
-    private const val TAG = "DemoApp"
+    private const val TAG = "AppDemo"
 
     fun d(tag: String = "", content: String) {
         if (tag.isEmpty()) {
