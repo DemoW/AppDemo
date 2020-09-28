@@ -1,6 +1,7 @@
 package lishui.example.app.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -11,14 +12,16 @@ import lishui.example.common.util.LogUtils
 /**
  * Created by lishui.lin for AppDemo on 20-9-24
  */
-class MainViewModel : ViewModel() {
+class MainViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun testCoroutine() {
         viewModelScope.launch {
             val result = async { doWorkThread() }
-            LogUtils.d(content = "test thread: "
-                    + Thread.currentThread().name
-                    + ", work result=" + result.await())
+            LogUtils.d(
+                content = "test thread: "
+                        + Thread.currentThread().name
+                        + ", work result=" + result.await()
+            )
             doMainThread()
         }
     }

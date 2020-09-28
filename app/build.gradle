@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion COMPILE_SDK
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         applicationId "lishui.example.app"
-        minSdkVersion 24
-        targetSdkVersion 29
+        minSdkVersion MIN_SUPPORT_SDK
+        targetSdkVersion TARGET_SDK
         versionCode 1
         versionName "1.0"
 

@@ -1,5 +1,6 @@
 package lishui.example.common.util;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +30,10 @@ public class UiUtils {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    }
+
+    public static void setStatusBarColor(final Activity activity, final int color) {
+        activity.getWindow().setStatusBarColor(color);
     }
 
     public static void showCutoutShortEdgesMode(Window window) {
