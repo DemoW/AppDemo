@@ -1,10 +1,9 @@
 package lishui.example.app.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import lishui.example.app.R
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

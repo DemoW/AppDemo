@@ -57,6 +57,8 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Interpolator;
 
+import androidx.core.os.BuildCompat;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -84,16 +86,50 @@ public final class Utilities {
     private static final Matrix sMatrix = new Matrix();
     private static final Matrix sInverseMatrix = new Matrix();
 
-    public static final boolean ATLEAST_Q = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+    private static boolean sIsAtLeastM;
+    private static boolean sIsAtLeastN;
+    private static boolean sIsAtLeastO;
+    private static boolean sIsAtLeastP;
+    private static boolean sIsAtLeastQ;
+    private static boolean sIsAtLeastR;
 
-    public static final boolean ATLEAST_P =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
+    static {
+        final int v = getApiVersion();
+        sIsAtLeastM = v >= android.os.Build.VERSION_CODES.M;
+        sIsAtLeastN = v >= android.os.Build.VERSION_CODES.N;
+        sIsAtLeastO = v >= android.os.Build.VERSION_CODES.O;
+        sIsAtLeastP = v >= android.os.Build.VERSION_CODES.P;
+        sIsAtLeastQ = v >= Build.VERSION_CODES.Q;
+        sIsAtLeastR = v >= 30;
+    }
 
-    public static final boolean ATLEAST_OREO_MR1 =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1;
+    public static int getApiVersion() {
+        return android.os.Build.VERSION.SDK_INT;
+    }
 
-    public static final boolean ATLEAST_OREO =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
+    public static boolean isAtLeastM() {
+        return sIsAtLeastM;
+    }
+
+    public static boolean isAtLeastN() {
+        return sIsAtLeastN;
+    }
+
+    public static boolean isAtLeastO() {
+        return sIsAtLeastO;
+    }
+
+    public static boolean isAtLeastP() {
+        return sIsAtLeastP;
+    }
+
+    public static boolean isAtLeastQ() {
+        return sIsAtLeastQ;
+    }
+
+    public static boolean isAtLeastR() {
+        return sIsAtLeastR;
+    }
 
     public static final int SINGLE_FRAME_MS = 16;
 
@@ -451,7 +487,7 @@ public final class Utilities {
     }
 
     public static boolean areAnimationsEnabled(Context context) {
-        return ATLEAST_OREO
+        return isAtLeastO()
                 ? ValueAnimator.areAnimatorsEnabled()
                 : !context.getSystemService(PowerManager.class).isPowerSaveMode();
     }

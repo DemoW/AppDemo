@@ -37,7 +37,7 @@ public class UiUtils {
     }
 
     public static void showCutoutShortEdgesMode(Window window) {
-        if (Utilities.ATLEAST_P) {
+        if (Utilities.isAtLeastP()) {
             window.getAttributes().layoutInDisplayCutoutMode
                     = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }

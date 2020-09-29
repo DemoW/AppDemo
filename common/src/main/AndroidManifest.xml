@@ -6,6 +6,7 @@
         <activity
             android:name=".ui.PermissionCheckActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/permission_activity_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
     </application>
