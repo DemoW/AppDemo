@@ -11,12 +11,13 @@ public class SubFactoryImpl extends SubFactory {
 
     private static final String TAG = "SubFactoryImpl";
 
+    private SubFactoryHost mHost;
     private Context mApplicationContext;
     private UIIntents mUIIntents;
 
-    public static void init(Context appContext) {
+    public static void init(Context appContext, SubFactoryHost host) {
         if (sInitialized || SubFactory.get() != null) {
-            LogUtils.INSTANCE.i(TAG, "SubFactoryImpl only call once, stop it.");
+            LogUtils.i(TAG, "SubFactoryImpl only call once, stop it.");
             return;
         }
 
@@ -24,8 +25,14 @@ public class SubFactoryImpl extends SubFactory {
         SubFactory.setInstance(factory);
         sInitialized = true;
 
+        factory.mHost = host;
         factory.mApplicationContext = appContext;
         factory.mUIIntents = new UIIntentsImpl();
+    }
+
+    @Override
+    public SubFactoryHost getSubFactoryHost() {
+        return mHost;
     }
 
     @Override

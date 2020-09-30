@@ -20,7 +20,7 @@ public class ProfileProperties {
         try {
             mProperties.load(context.getResources().getAssets().open(PROFILE_NAME));
             Set<String> propertyNames = mProperties.stringPropertyNames();
-            propertyNames.forEach(name -> LogUtils.INSTANCE.d(TAG, "property name=" + name));
+            propertyNames.forEach(name -> LogUtils.d(TAG, "property name=" + name));
         } catch (IOException e) {
             e.printStackTrace();
         }

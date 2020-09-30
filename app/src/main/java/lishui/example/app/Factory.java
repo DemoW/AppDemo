@@ -2,7 +2,7 @@ package lishui.example.app;
 
 import android.content.Context;
 
-import lishui.example.common.UIIntents;
+import lishui.example.app.messaging.MessagingLoader;
 import lishui.example.common.util.LogUtils;
 import lishui.example.common.util.ProfileProperties;
 
@@ -26,12 +26,14 @@ public abstract class Factory {
     protected static void setInstance(final Factory factory) {
         if (!sRegistered) {
             sInstance = factory;
-            LogUtils.INSTANCE.d(TAG, "Factory setInstance successfully.");
+            LogUtils.d(TAG, "Factory setInstance successfully.");
         }
     }
 
     public abstract Context getAppContext();
     public abstract App getApplication();
     public abstract ProfileProperties getProfileProperties();
-    public abstract void onRequiredPermissionsAcquired();
+    public abstract AppRepository getAppRepository();
+
+    public abstract MessagingLoader getMessagingLoader();
 }

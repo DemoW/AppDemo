@@ -14,23 +14,27 @@ import lishui.example.common.util.PermissionUtils
 
 class PermissionCheckActivity : AppCompatActivity() {
 
-    private val REQUIRED_PERMISSIONS_REQUEST_CODE = 1
-    private val AUTOMATED_RESULT_THRESHOLD_MILLLIS: Long = 250
-    private val PACKAGE_URI_PREFIX = "package:"
-    private var mRequestTimeMillis: Long = 0
+    companion object {
+        const val REQUIRED_PERMISSIONS_REQUEST_CODE = 1
+        const val AUTOMATED_RESULT_THRESHOLD_MILLIS: Long = 250
+        const val PACKAGE_URI_PREFIX = "package:"
+    }
 
-    private lateinit var mNextView: TextView
+    private var mRequestTimeMillis: Long = 0
+    private var isRedirectOnCreate: Boolean = false
+
+    private lateinit var mRequestView: TextView
     private lateinit var mSettingsView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (redirectIfNeeded()) {
-            return
-        }
+        isRedirectOnCreate = true
+        if (redirectIfNeeded()) return
+
         setContentView(R.layout.activity_permission_check)
 
-        mNextView = findViewById<View>(R.id.permission_request) as TextView
-        mNextView.setOnClickListener { tryRequestPermission() }
+        mRequestView = findViewById<View>(R.id.permission_request) as TextView
+        mRequestView.setOnClickListener { tryRequestPermission() }
 
         mSettingsView = findViewById<View>(R.id.permission_settings) as TextView
         mSettingsView.setOnClickListener {
@@ -40,6 +44,12 @@ class PermissionCheckActivity : AppCompatActivity() {
             )
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isRedirectOnCreate && redirectIfNeeded()) return
+        if (isRedirectOnCreate) isRedirectOnCreate = false
     }
 
     private fun tryRequestPermission() {
@@ -57,9 +67,7 @@ class PermissionCheckActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode != REQUIRED_PERMISSIONS_REQUEST_CODE) {
-            return
-        }
+        if (requestCode != REQUIRED_PERMISSIONS_REQUEST_CODE) return
 
         if (PermissionUtils.hasRequiredPermissions()) {
             //Factory.get().onRequiredPermissionsAcquired()
@@ -69,8 +77,8 @@ class PermissionCheckActivity : AppCompatActivity() {
             // If the permission request completes very quickly, it must be because the system
             // automatically denied. This can happen if the user had previously denied it
             // and checked the "Never ask again" check box.
-            if (currentTimeMillis - mRequestTimeMillis < AUTOMATED_RESULT_THRESHOLD_MILLLIS) {
-                mNextView.visibility = View.GONE
+            if (currentTimeMillis - mRequestTimeMillis < AUTOMATED_RESULT_THRESHOLD_MILLIS) {
+                mRequestView.visibility = View.GONE
                 mSettingsView.visibility = View.VISIBLE
             }
         }
@@ -78,9 +86,7 @@ class PermissionCheckActivity : AppCompatActivity() {
 
     /** Returns true if the redirecting was performed  */
     private fun redirectIfNeeded(): Boolean {
-        if (!PermissionUtils.hasRequiredPermissions()) {
-            return false
-        }
+        if (!PermissionUtils.hasRequiredPermissions()) return false
         redirect()
         return true
     }

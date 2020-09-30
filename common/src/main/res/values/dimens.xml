@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="demo_text_size_12dp">12dp</dimen>
+    <dimen name="demo_text_size_14dp">14dp</dimen>
+    <dimen name="demo_text_size_16dp">16dp</dimen>
+    <dimen name="demo_radius_size_2dp">2dp</dimen>
+    <dimen name="demo_radius_size_4dp">4dp</dimen>
+    <dimen name="demo_radius_size_8dp">8dp</dimen>
+    <dimen name="demo_radius_size_16dp">16dp</dimen>
+    <dimen name="demo_padding_size_4dp">4dp</dimen>
+    <dimen name="demo_padding_size_6dp">6dp</dimen>
+    <dimen name="demo_padding_size_8dp">8dp</dimen>
+    <dimen name="demo_padding_size_10dp">10dp</dimen>
+    <dimen name="demo_margin_size_12dp">12dp</dimen>
+    <dimen name="demo_margin_size_16dp">16dp</dimen>
+    <dimen name="demo_margin_size_24dp">24dp</dimen>
+    <dimen name="demo_margin_size_36dp">36dp</dimen>
+</resources>

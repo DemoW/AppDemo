@@ -1,3 +1,14 @@
 <resources>
 
+    <style name="BottomMenuStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">center</item>
+        <item name="layout_constraintHorizontal_weight">1</item>
+        <item name="android:textSize">@dimen/demo_text_size_14dp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/demo_text_primary</item>
+        <!--<item name="android:background">@color/demo_bg_button_secondary</item>-->
+    </style>
 </resources>
