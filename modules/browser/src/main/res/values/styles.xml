@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="BrowserTheme" parent="BaseTheme">
+        <item name="android:overlapAnchor">false</item>
+    </style>
+
+</resources>
