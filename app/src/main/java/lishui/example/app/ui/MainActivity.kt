@@ -3,6 +3,8 @@ package lishui.example.app.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import lishui.example.app.R
+import java.io.FileDescriptor
+import java.io.PrintWriter
 
 class MainActivity : BaseActivity() {
 
@@ -46,5 +48,21 @@ class MainActivity : BaseActivity() {
                 .add(R.id.fragment_container, fragment, fragmentTag)
                 .show(fragment)
                 .commitNow()
+    }
+
+    /**
+     * dump info without ancestor info
+     * $ adb shell dumpsys activity lishui.example.app.ui.MainActivity [...] s
+     */
+    override fun dump(
+        prefix: String,
+        fd: FileDescriptor?,
+        writer: PrintWriter,
+        args: Array<out String>?
+    ) {
+        val isDumpSimply = args?.let { it.isNotEmpty() && it.last() != "s" } ?: true
+        if (isDumpSimply) super.dump(prefix, fd, writer, args)
+
+        mainFragment?.dumpInfo(writer)
     }
 }

@@ -7,13 +7,14 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.provider.Browser;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import lishui.example.common.util.LogUtils;
 
 /**
  * Created by lishui.lin on 19-11-14
@@ -60,20 +61,21 @@ public class WebViewUtils {
         try {
             intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
         } catch (Exception ex) {
-            Log.w(BROWSER_TAG, "Bad URI " + url, ex);
+            LogUtils.w(BROWSER_TAG, "Bad URI " + url, ex);
             return false;
         }
         // Check for regular URIs that WebView supports by itself, but also
         // check if there is a specialized app that had registered itself
         // for this kind of an intent.
-        Matcher m = BROWSER_URI_SCHEMA.matcher(url);
+
+        /*Matcher m = BROWSER_URI_SCHEMA.matcher(url);
         if (m.matches() && !isSpecializedHandlerAvailable(context, intent)) {
             return false;
-        }
-        // Sanitize the Intent, ensuring web pages can not bypass browser
-        // security (only access to BROWSABLE activities).
+        }*/
+
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
-        intent.setComponent(null);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.setComponent(null);
         Intent selector = intent.getSelector();
         if (selector != null) {
             selector.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -87,13 +89,13 @@ public class WebViewUtils {
             context.startActivity(intent);
             return true;
         } catch (ActivityNotFoundException ex) {
-            Log.w(BROWSER_TAG, "No application can handle " + url);
+            LogUtils.w(BROWSER_TAG, "No application can handle " + url);
         } catch (SecurityException ex) {
             // This can happen if the Activity is exported="true", guarded by a permission, and sets
             // up an intent filter matching this intent. This is a valid configuration for an
             // Activity, so instead of crashing, we catch the exception and do nothing. See
             // https://crbug.com/808494 and https://crbug.com/889300.
-            Log.w(BROWSER_TAG, "SecurityException when starting intent for " + url);
+            LogUtils.w(BROWSER_TAG, "SecurityException when starting intent for " + url);
         }
         return false;
     }

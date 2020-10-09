@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="header_hint_text_color">@color/base_text_secondary</color>
+    <color name="header_hint_text_color">@color/demo_text_secondary</color>
 </resources>

@@ -1,6 +1,7 @@
 package lishui.example.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import lishui.example.app.messaging.MessagingLoader;
 import lishui.example.common.SubFactoryHost;
@@ -15,12 +16,14 @@ import lishui.example.common.util.ProfileProperties;
 class FactoryImpl extends Factory implements SubFactoryHost {
 
     private static final String TAG = "FactoryImpl";
+    private static final String SHARED_PREFERENCES_NAME = "app_demo_sp";
     protected static final int PERMISSION_DEFAULT_TYPE = 0;
 
     private App mApplication;
-    private Context mApplicationContext;
+    private Context mAppContext;
     private ProfileProperties mProfileProperties;
     private AppRepository mAppRepository;
+    private SharedPreferences sharedPreferences;
     private MessagingLoader mMessagingLoader;
 
     public static void register(final Context applicationContext, final App application) {
@@ -36,7 +39,7 @@ class FactoryImpl extends Factory implements SubFactoryHost {
         // At this point Factory is published. Services can now get initialized and depend on
         // Factory.get().
         factory.mApplication = application;
-        factory.mApplicationContext = applicationContext;
+        factory.mAppContext = applicationContext;
         factory.mProfileProperties = new ProfileProperties();
         factory.mAppRepository = new AppRepository(applicationContext);
         factory.mMessagingLoader = new MessagingLoader();
@@ -53,7 +56,7 @@ class FactoryImpl extends Factory implements SubFactoryHost {
 
     @Override
     public Context getAppContext() {
-        return mApplicationContext;
+        return mAppContext;
     }
 
     @Override
@@ -69,6 +72,15 @@ class FactoryImpl extends Factory implements SubFactoryHost {
     @Override
     public AppRepository getAppRepository() {
         return mAppRepository;
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences() {
+        if (sharedPreferences == null) {
+            sharedPreferences = mAppContext.getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        }
+        return sharedPreferences;
     }
 
     @Override

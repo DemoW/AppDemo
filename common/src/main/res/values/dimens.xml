@@ -11,6 +11,7 @@
     <dimen name="demo_padding_size_6dp">6dp</dimen>
     <dimen name="demo_padding_size_8dp">8dp</dimen>
     <dimen name="demo_padding_size_10dp">10dp</dimen>
+    <dimen name="demo_padding_size_16dp">16dp</dimen>
     <dimen name="demo_margin_size_12dp">12dp</dimen>
     <dimen name="demo_margin_size_16dp">16dp</dimen>
     <dimen name="demo_margin_size_24dp">24dp</dimen>

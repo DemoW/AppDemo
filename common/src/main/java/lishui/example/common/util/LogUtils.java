@@ -33,12 +33,17 @@ public class LogUtils {
         println(android.util.Log.ERROR, tag, android.util.Log.getStackTraceString(tr));
     }
 
+    public static void logThreadName(String tag) {
+        println(android.util.Log.DEBUG, tag, "Current Thread Name=" + Thread.currentThread().getName());
+    }
+
     /**
      * Low-level logging call.
+     *
      * @param level The priority/type of this log message
-     * @param tag Used to identify the source of a log message.  It usually identifies
-     *        the class or activity where the log call occurs.
-     * @param msg The message you would like logged.
+     * @param tag   Used to identify the source of a log message.  It usually identifies
+     *              the class or activity where the log call occurs.
+     * @param msg   The message you would like logged.
      */
     private static void println(final int level, final String tag, final String msg) {
         android.util.Log.println(level, DEFAULT_TAG, tag + " # " + msg);

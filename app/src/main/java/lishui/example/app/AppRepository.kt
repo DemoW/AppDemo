@@ -2,6 +2,8 @@ package lishui.example.app
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import lishui.example.app.db.AppDatabase
 
 /**
@@ -15,9 +17,14 @@ class AppRepository(private val appContext: Context) {
         }
     }
 
-    val database: AppDatabase = Room.databaseBuilder(
-        appContext,
-        AppDatabase::class.java, "app_demo_db"
-    ).build()
+//    val MIGRATION_1_2 = object : Migration(1, 2) {
+//        override fun migrate(database: SupportSQLiteDatabase) {
+//            database.execSQL("ALTER TABLE conversations ADD COLUMN pub_year INTEGER")
+//        }
+//    }
 
+    val appDb: AppDatabase = Room.databaseBuilder(
+        appContext,
+        AppDatabase::class.java, "app_demo.db"
+    ).build()
 }
