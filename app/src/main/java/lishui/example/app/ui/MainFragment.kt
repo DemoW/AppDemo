@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import lishui.example.app.R
@@ -50,7 +49,6 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mViewModel.loadSmsConversation(false)
-        //mViewModel.testCoroutine()
 
         mViewModel.mSmsConversationLiveData.observe(viewLifecycleOwner, Observer {
             mAdapter.updateDataIfNeed(it)

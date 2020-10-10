@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/snack_dialog_btn_press_color">
+    <item
+        android:id="@android:id/mask"
+        android:drawable="@drawable/snack_dialog_btn_bg_shape"/>
+</ripple>

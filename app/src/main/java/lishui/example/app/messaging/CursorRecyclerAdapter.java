@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package lishui.example.common.ui;
+package lishui.example.app.messaging;
 
 import android.content.Context;
 import android.database.ContentObserver;

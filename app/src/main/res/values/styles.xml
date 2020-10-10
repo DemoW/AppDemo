@@ -12,4 +12,53 @@
         <item name="android:visibility">gone</item>
         <!--<item name="android:background">@color/demo_bg_button_secondary</item>-->
     </style>
+
+    <style name="Animation.Snack.Dialog" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/snack_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/snack_dialog_exit</item>
+    </style>
+
+    <style name="SnackDialog">
+        <item name="android:fullDark">@android:color/transparent</item>
+        <item name="android:topDark">@drawable/snack_dialog_title_default_shape</item>
+        <item name="android:topBright">@drawable/snack_dialog_title_default_shape</item>
+        <item name="android:centerDark">@android:color/transparent</item>
+        <item name="android:bottomDark">@android:color/transparent</item>
+        <item name="android:fullBright">@android:color/transparent</item>
+        <item name="android:centerBright">@android:color/transparent</item>
+        <item name="android:bottomBright">@android:color/transparent</item>
+        <item name="android:bottomMedium">@android:color/transparent</item>
+        <item name="android:centerMedium">@android:color/transparent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="TextAppearance.Widget.Button.Snack" parent="@android:style/TextAppearance.Widget.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/snack_dialog_accent_primary_color</item>
+    </style>
+
+    <style name="Button.ButtonBar.SnackDialog" parent="@android:style/Widget.Material.Button.Borderless.Colored">
+        <item name="android:minWidth">@dimen/snack_dialog_button_bar_width</item>
+        <item name="android:minHeight">@dimen/snack_dialog_button_bar_height</item>
+        <item name="android:background">@drawable/snack_dialog_btn_bg_ripple</item>
+        <item name="android:textAppearance">@style/TextAppearance.Widget.Button.Snack</item>
+    </style>
+
+    <!-- DialogWindowTitle is private-->
+    <!--<style name="TextAppearance.SnackDialogWindowTitle" parent="@android:style/TextAppearance.DialogWindowTitle">
+        <item name="android:textSize">@dimen/snack_dialog_window_title_text_size</item>
+        <item name="android:textColor">@color/snack_dialog_text_primary_color</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="SnackDialogWindowTitle" parent="@android:style/DialogWindowTitle">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@style/TextAppearance.SnackDialogWindowTitle</item>
+    </style>-->
+
+    <!-- textAppearance is invalid-->
+    <!--<style name="TextAppearance.SnackDialog.Text" parent="@android:style/TextAppearance.Holo.DialogWindowTitle">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>-->
 </resources>

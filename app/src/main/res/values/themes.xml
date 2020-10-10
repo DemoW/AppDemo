@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.SnackDialog" parent="@android:style/Theme.DeviceDefault.Dialog.Alert">
+        <!-- Color palette -->
+        <item name="android:textColorPrimary">@color/snack_dialog_text_primary_color</item>
+        <item name="android:textColorSecondary">@color/snack_dialog_text_secondary_color</item>
+        <item name="android:colorError">@color/snack_dialog_error</item>
+
+        <!-- Dialog theme and style -->
+        <item name="android:alertDialogStyle">@style/SnackDialog</item>
+        <item name="android:alertDialogTheme">@style/Theme.SnackDialog</item>
+        <item name="android:dialogCornerRadius" tools:targetApi="p">16dp</item>
+        <item name="android:windowBackground">@drawable/snack_dialog_window_bg</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Snack.Dialog</item>
+
+        <!-- Text styles -->
+        <!--<item name="android:textAppearance">@style/TextAppearance.SnackDialog.Text</item>-->
+        <!--<item name="android:windowTitleStyle">@style/SnackDialogWindowTitle</item>-->
+
+        <!-- Action button style-->
+        <item name="android:buttonBarButtonStyle">@style/Button.ButtonBar.SnackDialog</item>
+
+        <!-- Others -->
+        <item name="android:windowElevation">16dp</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:buttonBarStyle">@null</item>
+        <item name="*android:windowFixedHeightMajor">@null</item>
+        <item name="*android:windowFixedHeightMinor">@null</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+    </style>
+
+    <!-- AlertDialog theme path: android-29/data/res/values/themes_material.xml -->
+    <!-- details see "Theme.Material" -->
+    <!--<style name="Theme.Material.BaseDialog">
+        <item name="colorBackground">?attr/colorBackgroundFloating</item>
+
+        <item name="windowFrame">@null</item>
+        <item name="windowTitleStyle">@style/DialogWindowTitle.Material</item>
+        <item name="windowTitleBackgroundStyle">@style/DialogWindowTitleBackground.Material</item>
+        <item name="windowBackground">@drawable/dialog_background_material</item>
+        <item name="windowElevation">@dimen/floating_window_z</item>
+        <item name="windowIsFloating">true</item>
+        <item name="windowContentOverlay">@null</item>
+        <item name="windowAnimationStyle">@style/Animation.Material.Dialog</item>
+        <item name="windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowCloseOnTouchOutside">@bool/config_closeDialogWhenTouchOutside</item>
+
+        <item name="colorBackgroundCacheHint">@null</item>
+
+        <item name="listPreferredItemPaddingLeft">?attr/dialogPreferredPadding</item>
+        <item name="listPreferredItemPaddingRight">?attr/dialogPreferredPadding</item>
+        <item name="listPreferredItemPaddingStart">?attr/dialogPreferredPadding</item>
+        <item name="listPreferredItemPaddingEnd">?attr/dialogPreferredPadding</item>
+
+        <item name="listDivider">@null</item>
+
+        <item name="preferencePanelStyle">@style/PreferencePanel.Dialog</item>
+    </style>-->
+</resources>

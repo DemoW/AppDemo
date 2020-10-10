@@ -35,7 +35,7 @@ class ConversationListItemView(
         mReceivedTimeText = findViewById(R.id.tv_received_time)
 
         setOnClickListener {
-            WebViewUtils.startBrowsingIntent(context, "https://www.baidu.com")
+            WebViewUtils.launchInnerBrowser(context, "https://www.baidu.com")
         }
     }
 

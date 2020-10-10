@@ -5,14 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import lishui.example.app.AppRepository
 import lishui.example.app.Factory
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.app.messaging.MessagingLoader
-import lishui.example.common.util.LogUtils
 import java.io.PrintWriter
 
 /**
@@ -51,29 +48,6 @@ class MainViewModel(val app: Application) : AndroidViewModel(app) {
                 mSmsConversationLiveData.postValue(conversations)
             }
         }
-    }
-
-    fun testCoroutine() {
-        viewModelScope.launch {
-            val result = async { doWorkThread() }
-            LogUtils.d(
-                TAG, "test thread: "
-                        + Thread.currentThread().name
-                        + ", work result=" + result.await()
-            )
-            doMainThread()
-        }
-    }
-
-    private suspend fun doWorkThread(): String = withContext(Dispatchers.Default) {
-        LogUtils.d(TAG, "doWorkThread start: " + Thread.currentThread().name)
-        Thread.sleep(5_000)
-        LogUtils.d(TAG, "doWorkThread end: " + Thread.currentThread().name)
-        return@withContext "Hello world"
-    }
-
-    private suspend fun doMainThread() = withContext(Dispatchers.Main) {
-        LogUtils.d(TAG, "doMainThread: " + Thread.currentThread().name)
     }
 
     fun dumpInfo(writer: PrintWriter) {

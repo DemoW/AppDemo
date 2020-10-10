@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/snack_dialog_bg"
+    android:insetLeft="@dimen/snack_dialog_start_end_padding"
+    android:insetRight="@dimen/snack_dialog_start_end_padding"
+    android:insetBottom="@dimen/snack_dialog_bottom_padding">
+</inset>

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="snack_dialog_bg_color">#FFFFFF</color>
+    <color name="snack_dialog_accent_primary_color">#396AF6</color>
+    <color name="snack_dialog_text_primary_color">#DC000000</color>
+    <color name="snack_dialog_text_secondary_color">#80000000</color>
+    <color name="snack_dialog_btn_press_color">#EEF1F9</color>
+    <color name="snack_dialog_error">#E52D43</color>
+
 </resources>

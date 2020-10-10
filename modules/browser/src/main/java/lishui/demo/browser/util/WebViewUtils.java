@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.provider.Browser;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -55,6 +56,16 @@ public class WebViewUtils {
         return intent != null ? intent.getDataString() : null;
     }
 
+    public static void launchInnerBrowser(Context context, String url) {
+        Intent intent = new Intent("lishui.intent.action.BROWSER");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setData(Uri.parse(url));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
+
+    }
+
     public static boolean startBrowsingIntent(Context context, String url) {
         Intent intent;
         // Perform generic parsing of the URI to turn it into an Intent.
@@ -68,10 +79,10 @@ public class WebViewUtils {
         // check if there is a specialized app that had registered itself
         // for this kind of an intent.
 
-        /*Matcher m = BROWSER_URI_SCHEMA.matcher(url);
+        Matcher m = BROWSER_URI_SCHEMA.matcher(url);
         if (m.matches() && !isSpecializedHandlerAvailable(context, intent)) {
             return false;
-        }*/
+        }
 
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

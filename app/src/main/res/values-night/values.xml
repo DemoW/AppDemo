@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="snack_dialog_bg_color">#383838</color>
+    <color name="snack_dialog_accent_primary_color">#5786FF</color>
+    <color name="snack_dialog_text_primary_color">#DEDEDE</color>
+    <color name="snack_dialog_text_secondary_color">#80FFFFFF</color>
+    <color name="snack_dialog_btn_press_color">#4ACBDEFF</color>
+    <color name="snack_dialog_error">#EF5160</color>
+</resources>
