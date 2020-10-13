@@ -1,4 +1,3 @@
 rootProject.name = "AppDemo"
 include ':common'
 include ':app'
-include ':modules:browser'
