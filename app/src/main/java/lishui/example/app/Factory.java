@@ -3,7 +3,10 @@ package lishui.example.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import kotlin.Lazy;
 import lishui.example.app.messaging.MessagingLoader;
+import lishui.example.app.work.WorkScheduler;
+import lishui.example.app.wrapper.PackageManagerWrapper;
 import lishui.example.common.util.LogUtils;
 import lishui.example.common.util.ProfileProperties;
 
@@ -33,7 +36,8 @@ public abstract class Factory {
     public abstract App getApplication();
     public abstract ProfileProperties getProfileProperties();
     public abstract AppRepository getAppRepository();
+    public abstract WorkScheduler getWorkScheduler();
     public abstract SharedPreferences getSharedPreferences();
-
+    public abstract PackageManagerWrapper getPackageManagerWrapper();
     public abstract MessagingLoader getMessagingLoader();
 }

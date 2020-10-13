@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,10 +18,11 @@ import lishui.example.app.R;
  */
 public class SnackDialog {
 
-    public static void showTestDialog(Context context) {
-        new BuilderWrapper(context)
+    public static AlertDialog showTestDialog(Context context, String content) {
+        if (TextUtils.isEmpty(content)) content = "test SnackDialog";
+        return new BuilderWrapper(context)
                 .setTitle(android.R.string.dialog_alert_title)
-                .setMessage("test SnackDialog")
+                .setMessage(content)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, null)
                 .show();

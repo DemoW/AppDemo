@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+<!--like Context#getExternalFilesDir(String)-->
+    <external-files-path
+        name="demo_images"
+        path="Pictures" />
+
+<!--like Context.getExternalCacheDir()-->
+<!--    <external-cache-path name="name" path="path" />-->
+
+<!--Context.getFilesDir(): files in private file area-->
+<!--    <files-path name="name" path="path" />-->
+
+<!--Context.getCacheDir(): caches in private file area-->
+<!--    <cache-path name="name" path="path" />-->
+
+</paths>
+    

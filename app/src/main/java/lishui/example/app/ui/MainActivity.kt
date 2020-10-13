@@ -1,7 +1,9 @@
 package lishui.example.app.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.widget.Button
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.findNavController
 import lishui.example.app.R
 import java.io.FileDescriptor
 import java.io.PrintWriter
@@ -9,45 +11,38 @@ import java.io.PrintWriter
 class MainActivity : BaseActivity() {
 
     companion object {
-        const val MAIN_PAGE_TAG = "main_page_tag"
+        private const val MAIN_PAGE_TAG = "main_page_tag"
+        private const val CAMERA_PAGE_TAG = "camera_page_tag"
     }
 
-    private lateinit var mainFragment: MainFragment
+    private lateinit var navFragmentContainer: FragmentContainerView
+    private lateinit var homeItemButton: Button
+    private lateinit var cameraItemButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-
-        if (savedInstanceState == null) {
-            supportFragmentManager.findFragmentByTag(MAIN_PAGE_TAG)?.let {
-                mainFragment = it as MainFragment
-            }
-
-            if (!this::mainFragment.isInitialized) mainFragment = MainFragment.newInstance()
-            switchFragment(mainFragment)
-        }
+        setContentView(R.layout.layout_main_activity)
+        initViews()
     }
 
-    private fun switchFragment(fragment: Fragment) {
-        val fragmentTag = when (fragment) {
-            is MainFragment -> {
-                MAIN_PAGE_TAG
-            }
-            else -> {
-                ""
+    private fun initViews() {
+        navFragmentContainer = findViewById(R.id.nav_host_fragment)
+        homeItemButton = findViewById(R.id.main_home_item)
+        cameraItemButton = findViewById(R.id.main_camera_item)
+
+        homeItemButton.setOnClickListener {
+            with(navFragmentContainer.findNavController()) {
+                if (this.currentDestination?.id == R.id.nav_main_fragment) return@with
+                popBackStack()
             }
         }
 
-        // other fragments hide
-        if (fragment.isAdded)
-            supportFragmentManager.beginTransaction()
-                .show(fragment)
-                .commitNow()
-        else
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, fragment, fragmentTag)
-                .show(fragment)
-                .commitNow()
+        cameraItemButton.setOnClickListener {
+            with(navFragmentContainer.findNavController()) {
+                if (this.currentDestination?.id == R.id.nav_camera_fragment) return@with
+                navigate(R.id.action_mainFragment_to_cameraFragment)
+            }
+        }
     }
 
     /**
@@ -60,9 +55,7 @@ class MainActivity : BaseActivity() {
         writer: PrintWriter,
         args: Array<out String>?
     ) {
-        val isDumpSimply = args?.let { it.isNotEmpty() && it.last() != "s" } ?: true
-        if (isDumpSimply) super.dump(prefix, fd, writer, args)
-
-        mainFragment?.dumpInfo(writer)
+        val isDumpAncestor = args?.let { it.isEmpty() || it.last() != "s" } ?: true
+        if (isDumpAncestor) super.dump(prefix, fd, writer, args)
     }
 }

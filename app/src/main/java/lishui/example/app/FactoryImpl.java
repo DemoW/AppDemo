@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import lishui.example.app.messaging.MessagingLoader;
+import lishui.example.app.work.WorkScheduler;
+import lishui.example.app.wrapper.PackageManagerWrapper;
 import lishui.example.common.SubFactoryHost;
 import lishui.example.common.SubFactoryImpl;
 import lishui.example.common.util.LogUtils;
@@ -23,7 +25,9 @@ class FactoryImpl extends Factory implements SubFactoryHost {
     private Context mAppContext;
     private ProfileProperties mProfileProperties;
     private AppRepository mAppRepository;
+    private WorkScheduler mWorkScheduler;
     private SharedPreferences sharedPreferences;
+    private PackageManagerWrapper packageManagerWrapper;
     private MessagingLoader mMessagingLoader;
 
     public static void register(final Context applicationContext, final App application) {
@@ -42,6 +46,7 @@ class FactoryImpl extends Factory implements SubFactoryHost {
         factory.mAppContext = applicationContext;
         factory.mProfileProperties = new ProfileProperties();
         factory.mAppRepository = new AppRepository(applicationContext);
+        factory.mWorkScheduler = new WorkScheduler();
         factory.mMessagingLoader = new MessagingLoader();
 
         SubFactoryImpl.init(applicationContext, factory);
@@ -75,12 +80,25 @@ class FactoryImpl extends Factory implements SubFactoryHost {
     }
 
     @Override
+    public WorkScheduler getWorkScheduler() {
+        return mWorkScheduler;
+    }
+
+    @Override
     public SharedPreferences getSharedPreferences() {
         if (sharedPreferences == null) {
             sharedPreferences = mAppContext.getSharedPreferences(
                     SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         }
         return sharedPreferences;
+    }
+
+    @Override
+    public PackageManagerWrapper getPackageManagerWrapper() {
+        if (packageManagerWrapper == null) {
+            packageManagerWrapper = new PackageManagerWrapper();
+        }
+        return packageManagerWrapper;
     }
 
     @Override
@@ -94,17 +112,6 @@ class FactoryImpl extends Factory implements SubFactoryHost {
             return;
         }
         sInitialized = true;
-
-        LogUtils.d(TAG, "onRequiredPermissionsAcquired type=" + type);
-
-//        mApplication.initializeSync(this);
-//        final Thread asyncInitialization = new Thread() {
-//            @Override
-//            public void run() {
-//                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-//                mApplication.initializeAsync(FactoryImpl.this);
-//            }
-//        };
-//        asyncInitialization.start();
+        //LogUtils.d(TAG, "onRequiredPermissionsAcquired type=" + type);
     }
 }

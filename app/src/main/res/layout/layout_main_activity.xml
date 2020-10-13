@@ -6,31 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/main_home_item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
     <Button
         android:id="@+id/main_home_item"
         style="@style/BottomMenuStyle"
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/main_other_item"
+        app:layout_constraintEnd_toStartOf="@id/main_camera_item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_container" />
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment" />
 
     <Button
-        android:id="@+id/main_other_item"
+        android:id="@+id/main_camera_item"
         style="@style/BottomMenuStyle"
-        android:text="Other"
+        android:text="Camera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/main_home_item"
-        app:layout_constraintTop_toBottomOf="@id/fragment_container" />
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
