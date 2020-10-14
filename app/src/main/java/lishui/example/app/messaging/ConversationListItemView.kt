@@ -10,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import lishui.demo.browser.util.WebViewUtils
 import lishui.example.app.R
 import lishui.example.app.db.entity.ConversationEntity
 
@@ -40,7 +39,6 @@ class ConversationListItemView(
         mReceivedTimeText = findViewById(R.id.tv_received_time)
 
         setOnClickListener {
-            //WebViewUtils.launchInnerBrowser(context, "https://www.baidu.com")
             findNavController().navigate(R.id.action_global_snack_dialog,
                 bundleOf(TAG to mSnippetText.text.toString()))
         }
