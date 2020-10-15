@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import lishui.example.app.R
 import lishui.example.app.messaging.ConversationListAdapter
 import lishui.example.app.viewmodel.MainViewModel
-import lishui.example.app.work.WorkScheduler
 import java.io.FileDescriptor
 import java.io.PrintWriter
 
@@ -52,8 +51,6 @@ class MainFragment : BaseFragment() {
         mViewModel.mSmsConversationLiveData.observe(viewLifecycleOwner, Observer {
             mAdapter.updateDataIfNeed(it)
         })
-
-        WorkScheduler.get().runOneTimeWork()
     }
 
 

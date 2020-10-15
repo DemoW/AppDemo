@@ -13,6 +13,8 @@ import android.widget.ImageView
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import lishui.example.app.R
 import lishui.example.app.util.FILE_PROVIDER_AUTHORITY
 import lishui.example.app.viewmodel.CameraViewModel
@@ -24,6 +26,7 @@ class CameraFragment : BaseFragment() {
 
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 1
+        private const val TEMP_PIC_FILE_NAME = "CAPTURE_CAMERA.jpg"
     }
 
     private lateinit var captureView: ImageView
@@ -41,12 +44,13 @@ class CameraFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         captureView = view.findViewById(R.id.capture_picture)
-        captureView.setOnClickListener { dispatchTakePictureIntent() }
+        captureView.setOnLongClickListener { dispatchTakePictureIntent() }
 
         val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        with(File(storageDir, "CAPTURE_CAMERA.jpg")){
+        with(File(storageDir, TEMP_PIC_FILE_NAME)) {
             if (exists()) {
                 Glide.with(this@CameraFragment)
+                    .applyDefaultRequestOptions(RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
                     .load(absolutePath)
                     .into(captureView)
             }
@@ -62,6 +66,7 @@ class CameraFragment : BaseFragment() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             //val imageBitmap = data?.extras?.get("data") as Bitmap
             Glide.with(this)
+                .applyDefaultRequestOptions(RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
                 .load(currentPhotoPath)
                 .into(captureView)
         }
@@ -71,7 +76,7 @@ class CameraFragment : BaseFragment() {
     private fun createImageFile(): File {
         // Create an image file name
         val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File(storageDir, "CAPTURE_CAMERA.jpg").also { currentPhotoPath = it.absolutePath }
+        return File(storageDir, TEMP_PIC_FILE_NAME).also { currentPhotoPath = it.absolutePath }
 //        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 //        return File.createTempFile(
 //            "JPEG_${timeStamp}_", /* prefix */
@@ -82,7 +87,7 @@ class CameraFragment : BaseFragment() {
 //        }
     }
 
-    private fun dispatchTakePictureIntent() {
+    private fun dispatchTakePictureIntent(): Boolean {
         if (PackageManagerWrapper.get().hasSystemFeature()) {
             Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                 takePictureIntent.resolveActivity(requireContext().packageManager)?.also {
@@ -106,7 +111,9 @@ class CameraFragment : BaseFragment() {
 
                 }
             }
+            return true
         }
+        return false
     }
 
     private fun galleryAddPic() {

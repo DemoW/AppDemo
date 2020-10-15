@@ -7,3 +7,5 @@ import lishui.example.app.BuildConfig
  */
 
 const val FILE_PROVIDER_AUTHORITY = BuildConfig.APPLICATION_ID + ".fileProvider"
+
+const val WAN_ANDROID_BASE_URI = "https://www.wanandroid.com"

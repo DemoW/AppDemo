@@ -40,4 +40,5 @@ public abstract class Factory {
     public abstract SharedPreferences getSharedPreferences();
     public abstract PackageManagerWrapper getPackageManagerWrapper();
     public abstract MessagingLoader getMessagingLoader();
+    public abstract NetworkManager getNetworkManager();
 }

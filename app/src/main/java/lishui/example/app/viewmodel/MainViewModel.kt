@@ -8,8 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lishui.example.app.AppRepository
 import lishui.example.app.Factory
+import lishui.example.app.NetworkManager
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.app.messaging.MessagingLoader
+import lishui.example.common.util.LogUtils
 import java.io.PrintWriter
 
 /**
@@ -32,7 +34,7 @@ class MainViewModel(val app: Application) : AndroidViewModel(app) {
                 Factory.get().sharedPreferences.getLong(LAST_QUERY_SMS_CONVERSATION, 0)
             if (forceUpdate
                 || (conversations.isEmpty()
-                && System.currentTimeMillis() - lastQueryTime > LAST_QUERY_DELAY_TIME)
+                        && System.currentTimeMillis() - lastQueryTime > LAST_QUERY_DELAY_TIME)
             ) {
                 val conversationList = arrayListOf<ConversationEntity>()
                 MessagingLoader.get().loadSmsConversations(conversationList)
@@ -47,6 +49,10 @@ class MainViewModel(val app: Application) : AndroidViewModel(app) {
             } else {
                 mSmsConversationLiveData.postValue(conversations)
             }
+
+            //val result = NetworkManager.get().listQnAList(1)
+            val result = NetworkManager.get().queryBySearchKey(0, "Android")
+            LogUtils.d(TAG, "result=" + result.data.datas.last().toString())
         }
     }
 

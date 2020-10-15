@@ -29,6 +29,7 @@ class FactoryImpl extends Factory implements SubFactoryHost {
     private SharedPreferences sharedPreferences;
     private PackageManagerWrapper packageManagerWrapper;
     private MessagingLoader mMessagingLoader;
+    private NetworkManager mNetworkManager;
 
     public static void register(final Context applicationContext, final App application) {
         if (sRegistered || Factory.get() != null) {
@@ -104,6 +105,14 @@ class FactoryImpl extends Factory implements SubFactoryHost {
     @Override
     public MessagingLoader getMessagingLoader() {
         return mMessagingLoader;
+    }
+
+    @Override
+    public NetworkManager getNetworkManager() {
+        if (mNetworkManager == null) {
+            mNetworkManager = new NetworkManager();
+        }
+        return mNetworkManager;
     }
 
     @Override
