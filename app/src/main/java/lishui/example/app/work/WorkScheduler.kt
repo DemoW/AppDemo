@@ -1,7 +1,7 @@
 package lishui.example.app.work
 
 import androidx.work.*
-import lishui.example.app.Factory
+import lishui.example.app.Dependency
 import lishui.example.common.util.LogUtils
 import java.util.concurrent.TimeUnit
 
@@ -13,7 +13,7 @@ class WorkScheduler {
     companion object {
         const val TAG = "WorkScheduler"
         fun get(): WorkScheduler {
-            return Factory.get().workScheduler
+            return Dependency.get().workScheduler
         }
     }
 
@@ -43,7 +43,7 @@ class WorkScheduler {
             .build()
 
         //WorkManager.getInstance(Factory.get().appContext).enqueue(oneTimeRequest)
-        WorkManager.getInstance(Factory.get().appContext)
+        WorkManager.getInstance(Dependency.get().appContext)
             .enqueueUniqueWork(
                 "one-time",
                 ExistingWorkPolicy.KEEP,
