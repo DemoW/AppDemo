@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import lishui.example.app.Factory
+import lishui.example.app.Dependency
 import lishui.example.app.R
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.app.messaging.ConversationListAdapter.ConversationListViewHolder
@@ -28,7 +28,7 @@ class ConversationListAdapter(private val mHostInterface: HostInterface?) :
         parent: ViewGroup,
         viewType: Int
     ): ConversationListViewHolder {
-        val layoutInflater = LayoutInflater.from(Factory.get().appContext)
+        val layoutInflater = LayoutInflater.from(Dependency.get().appContext)
         val itemView = layoutInflater.inflate(
             R.layout.conversation_list_item_view, null) as ConversationListItemView
         return ConversationListViewHolder(itemView)

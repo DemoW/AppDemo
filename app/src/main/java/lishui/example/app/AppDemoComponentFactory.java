@@ -29,7 +29,7 @@ public class AppDemoComponentFactory extends AppComponentFactory {
         Application app = super.instantiateApplicationCompat(cl, className);
 
         if (app instanceof ContextInitializer) {
-            ((ContextInitializer) app).setContextAvailableCallback(FactoryImpl::register);
+            ((ContextInitializer) app).setContextAvailableCallback(DependencyImpl::register);
         }
 
         return app;
@@ -43,7 +43,7 @@ public class AppDemoComponentFactory extends AppComponentFactory {
 
         ContentProvider contentProvider = super.instantiateProviderCompat(cl, className);
         if (contentProvider instanceof ContextInitializer) {
-            ((ContextInitializer) contentProvider).setContextAvailableCallback(FactoryImpl::register);
+            ((ContextInitializer) contentProvider).setContextAvailableCallback(DependencyImpl::register);
         }
 
         return contentProvider;

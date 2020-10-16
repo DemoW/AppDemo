@@ -15,7 +15,7 @@ import lishui.example.common.util.ProfileProperties;
 /**
  * Created by lishui.lin on 20-9-29
  */
-class FactoryImpl extends Factory implements SubFactoryHost {
+class DependencyImpl extends Dependency implements SubFactoryHost {
 
     private static final String TAG = "FactoryImpl";
     private static final String SHARED_PREFERENCES_NAME = "app_demo_sp";
@@ -31,30 +31,30 @@ class FactoryImpl extends Factory implements SubFactoryHost {
     private MessagingLoader mMessagingLoader;
     private NetworkManager mNetworkManager;
 
-    public static void register(final Context applicationContext, final App application) {
-        if (sRegistered || Factory.get() != null) {
+    public static void register(final Context appContext, final App application) {
+        if (sRegistered || Dependency.get() != null) {
             LogUtils.i(TAG, "FactoryImpl only call once, stop it.");
             return;
         }
 
-        final FactoryImpl factory = new FactoryImpl();
-        Factory.setInstance(factory);
+        final DependencyImpl dependency = new DependencyImpl();
+        Dependency.setInstance(dependency);
         sRegistered = true;
 
         // At this point Factory is published. Services can now get initialized and depend on
-        // Factory.get().
-        factory.mApplication = application;
-        factory.mAppContext = applicationContext;
-        factory.mProfileProperties = new ProfileProperties();
-        factory.mAppRepository = new AppRepository(applicationContext);
-        factory.mWorkScheduler = new WorkScheduler();
-        factory.mMessagingLoader = new MessagingLoader();
+        // Dependency.get().
+        dependency.mApplication = application;
+        dependency.mAppContext = appContext;
+        dependency.mProfileProperties = new ProfileProperties();
+        dependency.mAppRepository = new AppRepository(appContext);
+        dependency.mWorkScheduler = new WorkScheduler();
+        dependency.mMessagingLoader = new MessagingLoader();
 
-        SubFactoryImpl.init(applicationContext, factory);
-        factory.mProfileProperties.init(applicationContext);
+        SubFactoryImpl.init(appContext, dependency);
+        dependency.mProfileProperties.init(appContext);
 
         if (PermissionUtils.hasRequiredPermissions()) {
-            factory.onRequiredPermissionsAcquired(PERMISSION_DEFAULT_TYPE);
+            dependency.onRequiredPermissionsAcquired(PERMISSION_DEFAULT_TYPE);
         } else {
             LogUtils.d(TAG, "lost some permissions");
         }

@@ -15,7 +15,7 @@ class NetworkManager {
 
     companion object {
         fun get(): NetworkManager {
-            return Factory.get().networkManager
+            return Dependency.get().networkManager
         }
     }
 

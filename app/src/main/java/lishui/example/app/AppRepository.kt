@@ -2,8 +2,6 @@ package lishui.example.app
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import lishui.example.app.db.AppDatabase
 
 /**
@@ -13,7 +11,7 @@ class AppRepository(private val appContext: Context) {
 
     companion object {
         fun get(): AppRepository {
-            return Factory.get().appRepository
+            return Dependency.get().appRepository
         }
     }
 

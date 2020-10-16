@@ -5,7 +5,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import lishui.example.app.Factory
+import lishui.example.app.Dependency
 import lishui.example.app.R
 
 
@@ -20,7 +20,7 @@ class RvItemDecoration : RecyclerView.ItemDecoration() {
     private val mDividerRightPadding: Float
 
     init {
-        val context = Factory.get().appContext
+        val context = Dependency.get().appContext
         mDividerSize = context.resources.getDimension(R.dimen.item_decoration_divider_size)
         val paddingExtSize = context.resources.getDimension(R.dimen.demo_padding_size_16dp)
         mDividerLeftPadding = context.resources.getDimension(R.dimen.default_item_icon_size)+paddingExtSize

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lishui.example.app.AppRepository
-import lishui.example.app.Factory
+import lishui.example.app.Dependency
 import lishui.example.app.NetworkManager
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.app.messaging.MessagingLoader
@@ -31,7 +31,7 @@ class MainViewModel(val app: Application) : AndroidViewModel(app) {
         viewModelScope.launch(Dispatchers.Default) {
             val conversations = AppRepository.get().appDb.conversationDao().listAllConversations()
             val lastQueryTime =
-                Factory.get().sharedPreferences.getLong(LAST_QUERY_SMS_CONVERSATION, 0)
+                Dependency.get().sharedPreferences.getLong(LAST_QUERY_SMS_CONVERSATION, 0)
             if (forceUpdate
                 || (conversations.isEmpty()
                         && System.currentTimeMillis() - lastQueryTime > LAST_QUERY_DELAY_TIME)
@@ -42,7 +42,7 @@ class MainViewModel(val app: Application) : AndroidViewModel(app) {
                     MessagingLoader.get().loadSmsDataWithThreadId(it.threadId, it)
                 }
                 AppRepository.get().appDb.conversationDao().insertConversations(conversationList)
-                Factory.get().sharedPreferences.edit()
+                Dependency.get().sharedPreferences.edit()
                     .putLong(LAST_QUERY_SMS_CONVERSATION, System.currentTimeMillis())
                     .apply()
                 mSmsConversationLiveData.postValue(conversationList)

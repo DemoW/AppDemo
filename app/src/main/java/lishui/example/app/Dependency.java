@@ -3,7 +3,6 @@ package lishui.example.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import kotlin.Lazy;
 import lishui.example.app.messaging.MessagingLoader;
 import lishui.example.app.work.WorkScheduler;
 import lishui.example.app.wrapper.PackageManagerWrapper;
@@ -13,21 +12,21 @@ import lishui.example.common.util.ProfileProperties;
 /**
  * Created by lishui.lin on 20-9-29
  */
-public abstract class Factory {
+public abstract class Dependency {
 
     private static final String TAG = "Factory";
 
-    private static volatile Factory sInstance;
+    private static volatile Dependency sInstance;
     protected static boolean sRegistered;
     protected static boolean sInitialized;
 
-    public static Factory get() {
+    public static Dependency get() {
         return sInstance;
     }
 
-    protected static void setInstance(final Factory factory) {
+    protected static void setInstance(final Dependency dependency) {
         if (!sRegistered) {
-            sInstance = factory;
+            sInstance = dependency;
             LogUtils.d(TAG, "Factory setInstance successfully.");
         }
     }

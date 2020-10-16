@@ -16,7 +16,7 @@ class App : Application(), AppDemoComponentFactory.ContextInitializer {
                 .onContextAvailable(this, this)
         else {
             LogUtils.d(javaClass.simpleName, "init Factory in app lower than P")
-            FactoryImpl.register(this, this)
+            DependencyImpl.register(this, this)
         }
     }
 

@@ -3,7 +3,6 @@ package lishui.example.app.work
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import lishui.example.app.Factory
 import lishui.example.common.util.LogUtils
 
 /**

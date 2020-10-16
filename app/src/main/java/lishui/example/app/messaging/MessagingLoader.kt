@@ -1,7 +1,7 @@
 package lishui.example.app.messaging
 
 import android.provider.Telephony
-import lishui.example.app.Factory
+import lishui.example.app.Dependency
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.app.viewmodel.MainViewModel
 import lishui.example.common.util.LogUtils
@@ -14,12 +14,12 @@ class MessagingLoader {
     companion object {
         const val TAG = "MessagingLoader"
         fun get(): MessagingLoader {
-            return Factory.get().messagingLoader
+            return Dependency.get().messagingLoader
         }
     }
 
     fun loadSmsConversations(conversationList: ArrayList<ConversationEntity>) {
-        val app = Factory.get().appContext
+        val app = Dependency.get().appContext
         app.contentResolver.query(
             Telephony.Sms.Conversations.CONTENT_URI,
             arrayOf(
@@ -58,7 +58,7 @@ class MessagingLoader {
     }
 
     fun loadSmsDataWithThreadId(id: Int, entity: ConversationEntity) {
-        val app = Factory.get().appContext
+        val app = Dependency.get().appContext
         app.contentResolver.query(
             Telephony.Sms.CONTENT_URI,
             arrayOf(

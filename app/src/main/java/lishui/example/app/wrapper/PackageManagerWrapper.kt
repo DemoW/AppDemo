@@ -1,7 +1,7 @@
 package lishui.example.app.wrapper
 
 import android.content.pm.PackageManager
-import lishui.example.app.Factory
+import lishui.example.app.Dependency
 
 /**
  * Created by lishui.lin on 20-10-13
@@ -10,7 +10,7 @@ class PackageManagerWrapper {
 
     companion object {
         fun get(): PackageManagerWrapper {
-            return Factory.get().packageManagerWrapper
+            return Dependency.get().packageManagerWrapper
         }
     }
 
@@ -19,7 +19,7 @@ class PackageManagerWrapper {
     }
 
     private fun getPm(): PackageManager {
-        val appContext = Factory.get().appContext
+        val appContext = Dependency.get().appContext
         return appContext.packageManager
     }
 }
