@@ -1,4 +1,4 @@
-package lishui.example.app.ui
+package lishui.example.app.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +11,6 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (PermissionUtils.redirectToPermissionCheckIfNeeded(this)) {
-            return
-        }
+        if (PermissionUtils.redirectToPermissionCheckIfNeeded(this)) finish()
     }
 }

@@ -1,4 +1,4 @@
-package lishui.example.app.ui
+package lishui.example.app.camera
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import lishui.example.app.R
+import lishui.example.app.base.BaseFragment
 import lishui.example.app.util.FILE_PROVIDER_AUTHORITY
 import lishui.example.app.viewmodel.CameraViewModel
 import lishui.example.app.wrapper.PackageManagerWrapper
@@ -38,7 +39,7 @@ class CameraFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.layout_camera_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_camera_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +48,9 @@ class CameraFragment : BaseFragment() {
         captureView.setOnLongClickListener { dispatchTakePictureIntent() }
 
         val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        with(File(storageDir, TEMP_PIC_FILE_NAME)) {
+        with(File(storageDir,
+            TEMP_PIC_FILE_NAME
+        )) {
             if (exists()) {
                 Glide.with(this@CameraFragment)
                     .applyDefaultRequestOptions(RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
@@ -76,7 +79,9 @@ class CameraFragment : BaseFragment() {
     private fun createImageFile(): File {
         // Create an image file name
         val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File(storageDir, TEMP_PIC_FILE_NAME).also { currentPhotoPath = it.absolutePath }
+        return File(storageDir,
+            TEMP_PIC_FILE_NAME
+        ).also { currentPhotoPath = it.absolutePath }
 //        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 //        return File.createTempFile(
 //            "JPEG_${timeStamp}_", /* prefix */
@@ -106,7 +111,9 @@ class CameraFragment : BaseFragment() {
                             it
                         )
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                        startActivityForResult(takePictureIntent,
+                            REQUEST_IMAGE_CAPTURE
+                        )
                     }
 
                 }

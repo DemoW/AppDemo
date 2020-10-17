@@ -51,7 +51,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
         dependency.mMessagingLoader = new MessagingLoader();
 
         SubFactoryImpl.init(appContext, dependency);
-        dependency.mProfileProperties.init(appContext);
+        //dependency.mProfileProperties.init(appContext);
 
         if (PermissionUtils.hasRequiredPermissions()) {
             dependency.onRequiredPermissionsAcquired(PERMISSION_DEFAULT_TYPE);

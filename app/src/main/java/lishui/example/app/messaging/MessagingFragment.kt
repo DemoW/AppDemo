@@ -1,4 +1,4 @@
-package lishui.example.app.ui
+package lishui.example.app.messaging
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import lishui.example.app.R
-import lishui.example.app.messaging.ConversationListAdapter
-import lishui.example.app.viewmodel.MainViewModel
+import lishui.example.app.base.BaseFragment
+import lishui.example.app.rv.RvItemDecoration
+import lishui.example.app.viewmodel.MessagingViewModel
 import java.io.FileDescriptor
 import java.io.PrintWriter
 
-class MainFragment : BaseFragment() {
+class MessagingFragment : BaseFragment() {
 
-    private lateinit var mViewModel: MainViewModel
+    private lateinit var mViewModel: MessagingViewModel
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: ConversationListAdapter
 
@@ -30,12 +31,12 @@ class MainFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.layout_main_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_messaging_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mRecyclerView = view.findViewById(R.id.rv_message_container)
+        mRecyclerView = view.findViewById(R.id.rv_messaging_container)
         mRecyclerView.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager.VERTICAL, false
         )
@@ -46,7 +47,7 @@ class MainFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(MessagingViewModel::class.java)
         mViewModel.loadSmsConversation(false)
         mViewModel.mSmsConversationLiveData.observe(viewLifecycleOwner, Observer {
             mAdapter.updateDataIfNeed(it)

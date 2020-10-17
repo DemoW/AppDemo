@@ -1,4 +1,4 @@
-package lishui.example.app.ui
+package lishui.example.app.rv
 
 import android.graphics.Canvas
 import android.graphics.Paint

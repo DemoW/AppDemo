@@ -11,6 +11,10 @@ public class LogUtils {
         println(android.util.Log.DEBUG, tag, msg);
     }
 
+    public static void d(final String tag, final String msg, boolean isDebug) {
+        if (isDebug) println(android.util.Log.DEBUG, tag, msg);
+    }
+
     public static void i(final String tag, final String msg) {
         println(android.util.Log.INFO, tag, msg);
     }

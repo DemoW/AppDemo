@@ -99,7 +99,7 @@ public class PermissionUtils {
             return false;
         }
 
-        activity.finish();
+        //activity.finish();
         return true;
     }
 

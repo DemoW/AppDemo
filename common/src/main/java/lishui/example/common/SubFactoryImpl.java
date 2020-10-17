@@ -12,7 +12,7 @@ public class SubFactoryImpl extends SubFactory {
     private static final String TAG = "SubFactoryImpl";
 
     private SubFactoryHost mHost;
-    private Context mApplicationContext;
+    private Context mAppContext;
     private UIIntents mUIIntents;
 
     public static void init(Context appContext, SubFactoryHost host) {
@@ -26,7 +26,7 @@ public class SubFactoryImpl extends SubFactory {
         sInitialized = true;
 
         factory.mHost = host;
-        factory.mApplicationContext = appContext;
+        factory.mAppContext = appContext;
         factory.mUIIntents = new UIIntentsImpl();
     }
 
@@ -37,7 +37,7 @@ public class SubFactoryImpl extends SubFactory {
 
     @Override
     public Context getAppContext() {
-        return mApplicationContext;
+        return mAppContext;
     }
 
     @Override

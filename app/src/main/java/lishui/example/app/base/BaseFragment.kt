@@ -1,4 +1,4 @@
-package lishui.example.app.ui
+package lishui.example.app.base
 
 import androidx.fragment.app.Fragment
 

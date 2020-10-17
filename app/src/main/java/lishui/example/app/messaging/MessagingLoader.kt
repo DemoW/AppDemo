@@ -51,7 +51,8 @@ class MessagingLoader {
                     "position=${it.position}, "
                             + "{threadId=$threadId, "
                             + "snippet=$snippet, "
-                            + "count=$count, "
+                            + "count=$count, ",
+                    false
                 )
             } while (it.moveToNext())
         }
@@ -101,7 +102,8 @@ class MessagingLoader {
                                 + "date=$date, "
                                 + "sentDate=$sentDate, "
                                 + "read=$read, "
-                                + "status=$status}"
+                                + "status=$status}",
+                        false
                     )
                 }
 
