@@ -1,13 +1,13 @@
-package lishui.example.app
+package lishui.example.app.net
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import lishui.example.app.net.WanAndroidService
-import lishui.example.app.net.WanResult
+import lishui.example.app.Dependency
 import lishui.example.app.util.WAN_ANDROID_BASE_URI
 import lishui.example.app.wanandroid.Article
 import lishui.example.app.wanandroid.PageBody
 import lishui.example.app.wanandroid.QnAEntity
+import lishui.example.app.wanandroid.WanResult
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

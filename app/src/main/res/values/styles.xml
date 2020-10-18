@@ -1,6 +1,10 @@
 <resources>
 
-    <style name="BottomMenuStyle">
+   <!-- <style name="AppToolBar">
+        <item name="menu">@menu/app_menu</item>
+    </style>-->
+
+    <style name="ButtonMenuStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:textAllCaps">false</item>
@@ -13,6 +17,7 @@
         <!--<item name="android:background">@color/demo_bg_button_secondary</item>-->
     </style>
 
+<!-- SnackDialog begin -->
     <style name="Animation.Snack.Dialog" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/snack_dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/snack_dialog_exit</item>
@@ -43,22 +48,7 @@
         <item name="android:background">@drawable/snack_dialog_btn_bg_ripple</item>
         <item name="android:textAppearance">@style/TextAppearance.Widget.Button.Snack</item>
     </style>
+<!-- SnackDialog end -->
 
-    <!-- DialogWindowTitle is private-->
-    <!--<style name="TextAppearance.SnackDialogWindowTitle" parent="@android:style/TextAppearance.DialogWindowTitle">
-        <item name="android:textSize">@dimen/snack_dialog_window_title_text_size</item>
-        <item name="android:textColor">@color/snack_dialog_text_primary_color</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-    </style>
 
-    <style name="SnackDialogWindowTitle" parent="@android:style/DialogWindowTitle">
-        <item name="android:maxLines">1</item>
-        <item name="android:scrollHorizontally">true</item>
-        <item name="android:textAppearance">@style/TextAppearance.SnackDialogWindowTitle</item>
-    </style>-->
-
-    <!-- textAppearance is invalid-->
-    <!--<style name="TextAppearance.SnackDialog.Text" parent="@android:style/TextAppearance.Holo.DialogWindowTitle">
-        <item name="android:fontFamily">sans-serif-medium</item>
-    </style>-->
 </resources>

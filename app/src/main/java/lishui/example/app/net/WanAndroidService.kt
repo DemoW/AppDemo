@@ -3,6 +3,7 @@ package lishui.example.app.net
 import lishui.example.app.wanandroid.Article
 import lishui.example.app.wanandroid.PageBody
 import lishui.example.app.wanandroid.QnAEntity
+import lishui.example.app.wanandroid.WanResult
 import retrofit2.http.*
 
 interface WanAndroidService {

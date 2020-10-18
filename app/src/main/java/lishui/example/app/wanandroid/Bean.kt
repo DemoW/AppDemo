@@ -1,5 +1,11 @@
 package lishui.example.app.wanandroid
 
+data class WanResult<T>(
+    val data: T,
+    val errorCode: Int,
+    val errorMsg: String
+)
+
 // 页面结果列表
 data class PageBody<T>(
     val curPage: Int,

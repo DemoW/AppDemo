@@ -12,6 +12,10 @@ import lishui.example.app.viewmodel.MainViewModel
 
 class MainFragment : BaseFragment() {
 
+    companion object {
+        private const val TAG = "MainFragment"
+    }
+
     private lateinit var messagingItemButton: Button
     private lateinit var cameraItemButton: Button
 
@@ -27,6 +31,7 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
+        //LogUtils.d(TAG, fromContext<MainActivity>(requireContext()).resources.configuration.toString())
     }
 
     private fun initViews(rootView: View) {

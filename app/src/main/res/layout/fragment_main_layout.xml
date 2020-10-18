@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/btn_messaging_fragment"
-        style="@style/BottomMenuStyle"
+        style="@style/ButtonMenuStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="MessagingFragment"
@@ -20,7 +20,7 @@
 
     <Button
         android:id="@+id/btn_camera_fragment"
-        style="@style/BottomMenuStyle"
+        style="@style/ButtonMenuStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="CameraFragment"

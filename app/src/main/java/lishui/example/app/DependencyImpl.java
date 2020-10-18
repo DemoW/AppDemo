@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import lishui.example.app.messaging.MessagingLoader;
+import lishui.example.app.net.NetworkManager;
 import lishui.example.app.work.WorkScheduler;
 import lishui.example.app.wrapper.PackageManagerWrapper;
 import lishui.example.common.SubFactoryHost;
@@ -17,7 +18,7 @@ import lishui.example.common.util.ProfileProperties;
  */
 class DependencyImpl extends Dependency implements SubFactoryHost {
 
-    private static final String TAG = "FactoryImpl";
+    private static final String TAG = "DependencyImpl";
     private static final String SHARED_PREFERENCES_NAME = "app_demo_sp";
     protected static final int PERMISSION_DEFAULT_TYPE = 0;
 
@@ -33,7 +34,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
 
     public static void register(final Context appContext, final App application) {
         if (sRegistered || Dependency.get() != null) {
-            LogUtils.i(TAG, "FactoryImpl only call once, stop it.");
+            LogUtils.i(TAG, "DependencyImpl only call once, stop it.");
             return;
         }
 

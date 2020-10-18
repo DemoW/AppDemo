@@ -12,10 +12,10 @@ class App : Application(), AppDemoComponentFactory.ContextInitializer {
         super.onCreate()
         if (Utilities.isAtLeastP())
             mContextCallback
-                .also { LogUtils.d(javaClass.simpleName, "init Factory in app at least P") }
+                .also { LogUtils.d(javaClass.simpleName, "init Dependency in app at least P") }
                 .onContextAvailable(this, this)
         else {
-            LogUtils.d(javaClass.simpleName, "init Factory in app lower than P")
+            LogUtils.d(javaClass.simpleName, "init Dependency in app lower than P")
             DependencyImpl.register(this, this)
         }
     }

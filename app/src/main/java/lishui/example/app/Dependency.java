@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import lishui.example.app.messaging.MessagingLoader;
+import lishui.example.app.net.NetworkManager;
 import lishui.example.app.work.WorkScheduler;
 import lishui.example.app.wrapper.PackageManagerWrapper;
 import lishui.example.common.util.LogUtils;
@@ -14,7 +15,7 @@ import lishui.example.common.util.ProfileProperties;
  */
 public abstract class Dependency {
 
-    private static final String TAG = "Factory";
+    private static final String TAG = "Dependency";
 
     private static volatile Dependency sInstance;
     protected static boolean sRegistered;
@@ -27,7 +28,7 @@ public abstract class Dependency {
     protected static void setInstance(final Dependency dependency) {
         if (!sRegistered) {
             sInstance = dependency;
-            LogUtils.d(TAG, "Factory setInstance successfully.");
+            LogUtils.d(TAG, "Dependency setInstance successfully.");
         }
     }
 

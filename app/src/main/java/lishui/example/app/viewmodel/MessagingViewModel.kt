@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lishui.example.app.AppRepository
 import lishui.example.app.Dependency
-import lishui.example.app.NetworkManager
+import lishui.example.app.net.NetworkManager
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.app.messaging.MessagingLoader
 import lishui.example.common.util.LogUtils
@@ -49,8 +49,8 @@ class MessagingViewModel(val app: Application) : AndroidViewModel(app) {
                 mSmsConversationLiveData.postValue(conversations)
             }
 
-            /*val result = NetworkManager.get().queryBySearchKey(0, "Android")
-            LogUtils.d(MainViewModel.TAG, "result=" + result.data.datas.last().toString())*/
+            val result = NetworkManager.get().queryBySearchKey(0, "Android")
+            LogUtils.d(MainViewModel.TAG, "result total=" + result.data.total)
         }
     }
 
