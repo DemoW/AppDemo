@@ -26,6 +26,17 @@
         android:text="CameraFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_messaging_fragment" />
+        app:layout_constraintTop_toBottomOf="@id/btn_messaging_fragment"
+        app:layout_constraintBottom_toTopOf="@id/btn_video_fragment"/>
+
+    <Button
+        android:id="@+id/btn_video_fragment"
+        style="@style/ButtonMenuStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="ExoPlayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_camera_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
