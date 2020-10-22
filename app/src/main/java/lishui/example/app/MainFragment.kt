@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import lishui.example.app.base.BaseFragment
 import lishui.example.app.viewmodel.MainViewModel
-import lishui.example.player.ExoVideoPlayer
+import lishui.example.player.ExoPlayerActivity
 
 class MainFragment : BaseFragment() {
 
@@ -58,7 +58,7 @@ class MainFragment : BaseFragment() {
         }
 
         videoItemButton.setOnClickListener {
-            val intent = Intent(this@MainFragment.requireActivity(), ExoVideoPlayer::class.java)
+            val intent = Intent(this@MainFragment.requireActivity(), ExoPlayerActivity::class.java)
             startActivity(intent)
         }
     }
