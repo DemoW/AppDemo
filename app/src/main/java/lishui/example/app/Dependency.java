@@ -28,7 +28,7 @@ public abstract class Dependency {
     protected static void setInstance(final Dependency dependency) {
         if (!sRegistered) {
             sInstance = dependency;
-            LogUtils.d(TAG, "Dependency setInstance successfully.");
+            LogUtils.d(TAG, "Dependency setInstance successfully");
         }
     }
 

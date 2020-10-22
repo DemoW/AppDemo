@@ -2,7 +2,6 @@ package lishui.example.app
 
 import android.app.Application
 import lishui.example.common.util.LogUtils
-import lishui.example.common.util.Utilities
 
 class App : Application(), AppDemoComponentFactory.ContextInitializer {
 
@@ -10,12 +9,12 @@ class App : Application(), AppDemoComponentFactory.ContextInitializer {
 
     override fun onCreate() {
         super.onCreate()
-        if (Utilities.isAtLeastP())
+        if (this::mContextCallback.isInitialized) {
             mContextCallback
-                .also { LogUtils.d(javaClass.simpleName, "init Dependency in app at least P") }
+                .also { LogUtils.d(javaClass.simpleName, "init Dependency in app with ComponentFactory") }
                 .onContextAvailable(this, this)
-        else {
-            LogUtils.d(javaClass.simpleName, "init Dependency in app lower than P")
+        } else {
+            LogUtils.d(javaClass.simpleName, "init Dependency in app with DependencyImpl.register")
             DependencyImpl.register(this, this)
         }
     }

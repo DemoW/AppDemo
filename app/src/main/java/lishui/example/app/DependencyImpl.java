@@ -34,7 +34,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
 
     public static void register(final Context appContext, final App application) {
         if (sRegistered || Dependency.get() != null) {
-            LogUtils.i(TAG, "DependencyImpl only call once, stop it.");
+            LogUtils.i(TAG, "DependencyImpl only call once, stop it");
             return;
         }
 

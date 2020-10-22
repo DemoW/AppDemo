@@ -3,8 +3,11 @@ package lishui.example.player;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +22,6 @@ import com.google.android.exoplayer2.drm.FrameworkMediaDrm;
 import com.google.android.exoplayer2.mediacodec.MediaCodecRenderer;
 import com.google.android.exoplayer2.mediacodec.MediaCodecUtil;
 import com.google.android.exoplayer2.source.BehindLiveWindowException;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.util.ErrorMessageProvider;
 import com.google.android.exoplayer2.util.EventLogger;
@@ -37,28 +39,32 @@ import static com.google.android.exoplayer2.util.Assertions.checkNotNull;
 public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
 
     private static final String TAG = "ExoVideoPlayer";
+    private static final boolean isDebug = BuildConfig.DEBUG;
 
     // Saved instance state keys.
-    private static final String KEY_TRACK_SELECTOR_PARAMETERS = "track_selector_parameters";
     private static final String KEY_WINDOW = "window";
     private static final String KEY_POSITION = "position";
     private static final String KEY_AUTO_PLAY = "auto_play";
+    public static final String KEY_SOURCE_URI = "source_uri";
+    public static final String KEY_SOURCE_TITLE = "source_title";
 
-    protected StyledPlayerView playerView;
-    private SimpleExoPlayer player;
-    private List<MediaItem> mediaItems;
+    private TextView sourceTitleView;
+    protected StyledPlayerView playerView; // Exo播放视图层
+    private SimpleExoPlayer player;        // Exo播放器
+    private List<MediaItem> mediaItems;    // 播放列表
 
-    private DefaultTrackSelector trackSelector;
-    private DefaultTrackSelector.Parameters trackSelectorParameters;
     private boolean startAutoPlay;
     private int startWindow;
     private long startPosition;
+    private String uri;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo_video_player);
 
+        sourceTitleView = findViewById(R.id.source_title);
         playerView = findViewById(R.id.player_view);
         playerView.setControllerVisibilityListener(this::onVisibilityChange);
         playerView.showController();
@@ -66,14 +72,12 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
         playerView.requestFocus();
 
         if (savedInstanceState != null) {
-            trackSelectorParameters = savedInstanceState.getParcelable(KEY_TRACK_SELECTOR_PARAMETERS);
             startAutoPlay = savedInstanceState.getBoolean(KEY_AUTO_PLAY);
             startWindow = savedInstanceState.getInt(KEY_WINDOW);
             startPosition = savedInstanceState.getLong(KEY_POSITION);
+            uri = savedInstanceState.getString(KEY_SOURCE_URI, "");
+            title = savedInstanceState.getString(KEY_SOURCE_TITLE, "");
         } else {
-            DefaultTrackSelector.ParametersBuilder builder =
-                    new DefaultTrackSelector.ParametersBuilder(/* context= */ this);
-            trackSelectorParameters = builder.build();
             clearStartPosition();
         }
     }
@@ -81,12 +85,12 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        updateTrackSelectorParameters();
         updateStartPosition();
-        outState.putParcelable(KEY_TRACK_SELECTOR_PARAMETERS, trackSelectorParameters);
         outState.putBoolean(KEY_AUTO_PLAY, startAutoPlay);
         outState.putInt(KEY_WINDOW, startWindow);
         outState.putLong(KEY_POSITION, startPosition);
+        outState.putString(KEY_SOURCE_URI, uri);
+        outState.putString(KEY_SOURCE_TITLE, title);
     }
 
     @Override
@@ -146,18 +150,17 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
      */
     private boolean initializePlayer() {
         if (player == null) {
-            mediaItems = createMediaItems();
+
+            Intent intent = getIntent();
+            mediaItems = createMediaItems(intent);
             if (mediaItems.isEmpty()) {
+                finish();
                 return false;
             }
 
-            trackSelector = new DefaultTrackSelector(/* context= */ this);
-            trackSelector.setParameters(trackSelectorParameters);
-            player = new com.google.android.exoplayer2.SimpleExoPlayer.Builder(/* context= */ this)
-                    //.setTrackSelector(trackSelector)
-                    .build();
+            player = new SimpleExoPlayer.Builder(/* context= */ this).build();
             player.addListener(new PlayerEventListener());
-            player.addAnalyticsListener(new EventLogger(trackSelector));
+            player.addAnalyticsListener(new EventLogger(null));
             player.setAudioAttributes(AudioAttributes.DEFAULT, /* handleAudioFocus= */ true);
             player.setPlayWhenReady(startAutoPlay);
             playerView.setPlayer(player);
@@ -173,19 +176,32 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
         return true;
     }
 
-    private List<MediaItem> createMediaItems() {
+    private List<MediaItem> createMediaItems(Intent intent) {
+        if (intent != null) {
+            uri = intent.getStringExtra(KEY_SOURCE_URI);
+            title = intent.getStringExtra(KEY_SOURCE_TITLE);
+        }
+
+        if (isDebug && TextUtils.isEmpty(uri)) {
+            uri = "https://vipvideo.szzhangchu.com/cbc0f857a5344abc977e058feab59523/016bc391fb7ec97adf7467840876f052-ld-encrypt-stream.m3u8";
+            title = "Debug ExoPlayer";
+        }
+        if (TextUtils.isEmpty(uri)) {
+            Log.d(TAG, "createMediaItems with empty uri...");
+            return Collections.emptyList();
+        }
+
+        sourceTitleView.setText(title);
         List<MediaItem> mediaItems = new ArrayList<>();
-        // Build the media items.
-        MediaItem firstItem = MediaItem.fromUri("https://vipvideo.szzhangchu.com/8f09095aa6fc4ad390a36e16461bb636/9b4aa82787fd0913ff34504041cb0b48-ld-encrypt-stream.m3u8");
-        MediaItem secondItem = MediaItem.fromUri("https://vipvideo.szzhangchu.com/cbc0f857a5344abc977e058feab59523/016bc391fb7ec97adf7467840876f052-ld-encrypt-stream.m3u8");
-        mediaItems.add(firstItem);
-        mediaItems.add(secondItem);
+        // Build the media items
+        MediaItem sourceItem = MediaItem.fromUri(uri);
+        mediaItems.add(sourceItem);
 
         for (int i = 0; i < mediaItems.size(); i++) {
             MediaItem mediaItem = mediaItems.get(i);
 
             if (!Util.checkCleartextTrafficPermitted(mediaItem)) {
-                //showToast(R.string.error_cleartext_not_permitted);
+                showToast(R.string.error_cleartext_not_permitted);
                 return Collections.emptyList();
             }
             if (Util.maybeRequestReadExternalStoragePermission(/* activity= */ this, mediaItem)) {
@@ -196,7 +212,7 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
             MediaItem.DrmConfiguration drmConfiguration =
                     checkNotNull(mediaItem.playbackProperties).drmConfiguration;
             if (drmConfiguration != null && !FrameworkMediaDrm.isCryptoSchemeSupported(drmConfiguration.uuid)) {
-                //showToast(R.string.error_drm_unsupported_scheme);
+                showToast(R.string.error_drm_unsupported_scheme);
                 finish();
                 return Collections.emptyList();
             }
@@ -212,6 +228,7 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
     public void onVisibilityChange(int visibility) {
         // Controller visibility changed
         Log.d(TAG, "ExoController onVisibilityChange: " + visibility);
+        sourceTitleView.setVisibility(visibility);
     }
 
     private class PlayerEventListener implements Player.EventListener {
@@ -221,7 +238,6 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
             if (playbackState == Player.STATE_ENDED) {
                 playerView.showController();
             }
-            //updateButtonVisibility();
         }
 
         @Override
@@ -248,12 +264,6 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
         return false;
     }
 
-    private void updateTrackSelectorParameters() {
-        if (trackSelector != null) {
-            trackSelectorParameters = trackSelector.getParameters();
-        }
-    }
-
     private void updateStartPosition() {
         if (player != null) {
             startAutoPlay = player.getPlayWhenReady();
@@ -270,12 +280,10 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
 
     protected void releasePlayer() {
         if (player != null) {
-            updateTrackSelectorParameters();
             updateStartPosition();
             player.release();
             player = null;
             mediaItems = Collections.emptyList();
-            trackSelector = null;
         }
     }
 
@@ -284,7 +292,7 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
         @Override
         @NonNull
         public Pair<Integer, String> getErrorMessage(@NonNull ExoPlaybackException e) {
-            String errorString = "error demo video";
+            String errorString = getString(R.string.error_generic);
             if (e.type == ExoPlaybackException.TYPE_RENDERER) {
                 Exception cause = e.getRendererException();
                 if (cause instanceof MediaCodecRenderer.DecoderInitializationException) {
@@ -293,20 +301,14 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
                             (MediaCodecRenderer.DecoderInitializationException) cause;
                     if (decoderInitializationException.codecInfo == null) {
                         if (decoderInitializationException.getCause() instanceof MediaCodecUtil.DecoderQueryException) {
-                            //errorString = getString(R.string.error_querying_decoders);
+                            errorString = getString(R.string.error_querying_decoders);
                         } else if (decoderInitializationException.secureDecoderRequired) {
-//                            errorString =
-//                                    getString(
-//                                            R.string.error_no_secure_decoder, decoderInitializationException.mimeType);
+                            errorString = getString(R.string.error_no_secure_decoder, decoderInitializationException.mimeType);
                         } else {
-//                            errorString =
-//                                    getString(R.string.error_no_decoder, decoderInitializationException.mimeType);
+                            errorString = getString(R.string.error_no_decoder, decoderInitializationException.mimeType);
                         }
                     } else {
-//                        errorString =
-//                                getString(
-//                                        R.string.error_instantiating_decoder,
-//                                        decoderInitializationException.codecInfo.name);
+                        errorString = getString(R.string.error_instantiating_decoder, decoderInitializationException.codecInfo.name);
                     }
                 }
             }
@@ -314,5 +316,12 @@ public class ExoPlayerActivity extends Activity implements PlaybackPreparer {
         }
     }
 
+    private void showToast(int messageId) {
+        showToast(getString(messageId));
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
 
 }

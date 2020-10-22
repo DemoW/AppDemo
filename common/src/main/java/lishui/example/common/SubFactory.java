@@ -20,7 +20,7 @@ public abstract class SubFactory {
     protected static void setInstance(final SubFactory factory) {
         if (!sInitialized) {
             sInstance = factory;
-            LogUtils.d(TAG, "SubFactory setInstance successfully.");
+            LogUtils.d(TAG, "SubFactory setInstance successfully");
         }
     }
 
