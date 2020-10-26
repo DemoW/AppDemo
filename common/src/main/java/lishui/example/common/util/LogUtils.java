@@ -1,11 +1,18 @@
 package lishui.example.common.util;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 /**
  * Created by lishui.lin on 20-9-30
  */
 public class LogUtils {
 
     private static final String DEFAULT_TAG = "AppDemo";
+
+    public static void d(final String msg) {
+        println(android.util.Log.DEBUG, "", msg);
+    }
 
     public static void d(final String tag, final String msg) {
         println(android.util.Log.DEBUG, tag, msg);
@@ -41,6 +48,10 @@ public class LogUtils {
         println(android.util.Log.DEBUG, tag, "Current Thread Name=" + Thread.currentThread().getName());
     }
 
+    public static void showStackTrace() {
+        d(Log.getStackTraceString(new Throwable()));
+    }
+
     /**
      * Low-level logging call.
      *
@@ -50,11 +61,15 @@ public class LogUtils {
      * @param msg   The message you would like logged.
      */
     private static void println(final int level, final String tag, final String msg) {
-        android.util.Log.println(level, DEFAULT_TAG, tag + " # " + msg);
-
-        if (level >= android.util.Log.DEBUG) {
-            // to do something
+        if (TextUtils.isEmpty(tag)) {
+            android.util.Log.println(level, DEFAULT_TAG, msg);
+        } else {
+            android.util.Log.println(level, DEFAULT_TAG, tag + " # " + msg);
         }
+
+        /*if (level >= android.util.Log.DEBUG) {
+            // to do something
+        }*/
     }
 
     /**
