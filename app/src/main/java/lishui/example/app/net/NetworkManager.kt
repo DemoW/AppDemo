@@ -3,7 +3,7 @@ package lishui.example.app.net
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import lishui.example.app.Dependency
-import lishui.example.app.util.WAN_ANDROID_BASE_URI
+import lishui.example.app.WAN_ANDROID_BASE_URI
 import lishui.example.app.wanandroid.Article
 import lishui.example.app.wanandroid.PageBody
 import lishui.example.app.wanandroid.QnAEntity

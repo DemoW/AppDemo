@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import lishui.example.app.R
 import lishui.example.app.base.BaseFragment
-import lishui.example.app.rv.RvItemDecoration
+import lishui.example.app.ui.RvItemDecoration
 import lishui.example.app.viewmodel.MessagingViewModel
 import java.io.FileDescriptor
 import java.io.PrintWriter

@@ -17,7 +17,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import lishui.example.app.R
 import lishui.example.app.base.BaseFragment
-import lishui.example.app.util.FILE_PROVIDER_AUTHORITY
+import lishui.example.app.FILE_PROVIDER_AUTHORITY
+import lishui.example.app.databinding.FragmentCameraLayoutBinding
 import lishui.example.app.viewmodel.CameraViewModel
 import lishui.example.app.wrapper.PackageManagerWrapper
 import java.io.File

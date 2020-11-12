@@ -3,7 +3,6 @@ package lishui.example.app.messaging
 import android.provider.Telephony
 import lishui.example.app.Dependency
 import lishui.example.app.db.entity.ConversationEntity
-import lishui.example.app.viewmodel.MainViewModel
 import lishui.example.common.util.LogUtils
 
 /**
@@ -47,7 +46,7 @@ class MessagingLoader {
                 conversationList.add(entity)
 
                 LogUtils.d(
-                    MainViewModel.TAG,
+                    TAG,
                     "position=${it.position}, "
                             + "{threadId=$threadId, "
                             + "snippet=$snippet, "

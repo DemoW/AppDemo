@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
 import lishui.example.app.base.BaseActivity
 import lishui.example.common.util.LogUtils
 import java.io.FileDescriptor
@@ -30,7 +31,6 @@ class MainActivity : BaseActivity() {
         navFragmentContainer = findViewById(R.id.nav_host_fragment)
         val toolbar: Toolbar = findViewById(R.id.app_tool_bar)
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //NavigationUI.setupWithNavController(toolbar, findNavController(R.id.nav_host_fragment))
@@ -58,13 +58,26 @@ class MainActivity : BaseActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        LogUtils.d(TAG, "onOptionsItemSelected id=${item.itemId}, title=${item.title}")
-
-        when (item.itemId) {
-            android.R.id.home -> onBackPressed()
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            onBackPressed()
+            true
         }
-        return super.onOptionsItemSelected(item)
+        R.id.action_search -> {
+            with(findNavController(R.id.nav_host_fragment)) {
+                if (this.currentDestination?.id == R.id.nav_search_fragment) {
+                    return@with false
+                }
+                navigate(R.id.action_mainFragment_to_searchFragment)
+            }
+            true
+        }
+        R.id.action_settings -> {
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }.also {
+        LogUtils.d(TAG, "onOptionsItemSelected id=${item.itemId}, title=${item.title}")
     }
 
     /**

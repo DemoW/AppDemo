@@ -3,6 +3,7 @@
    <!-- <style name="AppToolBar">
         <item name="menu">@menu/app_menu</item>
     </style>-->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar"/>
 
     <style name="ButtonMenuStyle">
         <item name="android:layout_width">0dp</item>

@@ -26,5 +26,5 @@ public abstract class SubFactory {
 
     public abstract SubFactoryHost getSubFactoryHost();
     public abstract Context getAppContext();
-    public abstract UIIntents getUIIntents();
+    public abstract UiIntents getUIIntents();
 }

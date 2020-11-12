@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import lishui.example.common.SubFactory;
-import lishui.example.common.UIIntents;
+import lishui.example.common.UiIntents;
 
 /**
  * Created by lishui.lin on 20-9-28
@@ -93,7 +93,7 @@ public class PermissionUtils {
 
     public static boolean redirectToPermissionCheckIfNeeded(final Activity activity) {
         if (!hasRequiredPermissions()) {
-            UIIntents.get().launchPermissionCheckActivity(activity);
+            UiIntents.get().launchPermissionCheckActivity(activity);
         } else {
             // No redirect performed
             return false;

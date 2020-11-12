@@ -30,6 +30,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".PermissionCheckActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/permission_activity_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="lishui.example.app.action.PERMISSION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"

@@ -1,4 +1,4 @@
-package lishui.example.app.rv
+package lishui.example.app.ui
 
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -23,8 +23,10 @@ class RvItemDecoration : RecyclerView.ItemDecoration() {
         val context = Dependency.get().appContext
         mDividerSize = context.resources.getDimension(R.dimen.item_decoration_divider_size)
         val paddingExtSize = context.resources.getDimension(R.dimen.demo_padding_size_16dp)
-        mDividerLeftPadding = context.resources.getDimension(R.dimen.default_item_icon_size)+paddingExtSize
-        mDividerRightPadding = context.resources.getDimension(R.dimen.demo_padding_size_10dp) + paddingExtSize
+        mDividerLeftPadding =
+            context.resources.getDimension(R.dimen.default_item_icon_size) + paddingExtSize
+        mDividerRightPadding =
+            context.resources.getDimension(R.dimen.demo_padding_size_10dp) + paddingExtSize
         mDividerPaint.color = context.resources.getColor(R.color.demo_divider, null)
     }
 

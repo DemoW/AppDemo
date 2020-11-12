@@ -1,6 +1,4 @@
-package lishui.example.app.util
-
-import lishui.example.app.BuildConfig
+package lishui.example.app
 
 /**
  * Created by lishui.lin on 20-10-13

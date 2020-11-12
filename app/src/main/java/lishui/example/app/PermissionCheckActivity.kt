@@ -1,4 +1,4 @@
-package lishui.example.common.ui
+package lishui.example.app
 
 import android.content.Intent
 import android.net.Uri
@@ -8,8 +8,7 @@ import android.provider.Settings
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import lishui.example.common.R
-import lishui.example.common.UIIntents
+import lishui.example.common.UiIntents
 import lishui.example.common.util.PermissionUtils
 
 class PermissionCheckActivity : AppCompatActivity() {
@@ -59,7 +58,10 @@ class PermissionCheckActivity : AppCompatActivity() {
             return
         }
         mRequestTimeMillis = SystemClock.elapsedRealtime()
-        requestPermissions(missingPermissions, REQUIRED_PERMISSIONS_REQUEST_CODE)
+        requestPermissions(
+            missingPermissions,
+            REQUIRED_PERMISSIONS_REQUEST_CODE
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -92,7 +94,7 @@ class PermissionCheckActivity : AppCompatActivity() {
     }
 
     private fun redirect() {
-        UIIntents.get().launchMainUiActivity(this)
+        UiIntents.get().launchMainUiActivity(this)
         finish()
     }
 }

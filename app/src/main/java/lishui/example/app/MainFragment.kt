@@ -1,16 +1,13 @@
 package lishui.example.app
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import lishui.example.app.base.BaseFragment
-import lishui.example.app.viewmodel.MainViewModel
-import lishui.example.player.ExoPlayerActivity
+import lishui.example.common.UiIntents
 
 class MainFragment : BaseFragment() {
 
@@ -21,8 +18,6 @@ class MainFragment : BaseFragment() {
     private lateinit var messagingItemButton: Button
     private lateinit var cameraItemButton: Button
     private lateinit var videoItemButton: Button
-
-    private lateinit var mViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,13 +53,11 @@ class MainFragment : BaseFragment() {
         }
 
         videoItemButton.setOnClickListener {
-            val intent = Intent(this@MainFragment.requireActivity(), ExoPlayerActivity::class.java)
-            startActivity(intent)
+            UiIntents.get().launchExoVideo(it.context)
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 }

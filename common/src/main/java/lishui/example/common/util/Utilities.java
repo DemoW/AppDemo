@@ -57,8 +57,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Interpolator;
 
-import androidx.core.os.BuildCompat;
-
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.Method;
