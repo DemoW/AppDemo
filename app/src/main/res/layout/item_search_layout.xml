@@ -2,27 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/search_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/demo_padding_size_8dp"
+    android:background="@drawable/search_bg_shape"
+    android:paddingStart="@dimen/demo_padding_size_16dp"
+    android:paddingTop="@dimen/demo_padding_size_8dp"
+    android:paddingEnd="@dimen/demo_padding_size_16dp"
+    android:paddingBottom="@dimen/demo_padding_size_8dp">
 
     <TextView
         android:id="@+id/search_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:gravity="start|center_vertical"
+        android:paddingBottom="@dimen/demo_padding_size_8dp"
+        android:textColor="@color/demo_text_primary"
+        android:textSize="@dimen/demo_text_size_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_title"
         app:layout_constraintVertical_weight="1" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -33,10 +32,12 @@
         app:layout_constraintGuide_percent="0.6" />
 
     <TextView
-        android:id="@+id/search_author"
+        android:id="@+id/search_chapter_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:textColor="@color/demo_text_secondary"
+        android:textSize="@dimen/demo_text_size_12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
@@ -52,7 +53,9 @@
         android:id="@+id/search_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="end"
+        android:textColor="@color/demo_text_secondary"
+        android:textSize="@dimen/demo_text_size_12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />

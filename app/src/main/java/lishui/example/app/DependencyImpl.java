@@ -8,7 +8,7 @@ import lishui.example.app.net.NetworkManager;
 import lishui.example.app.work.WorkScheduler;
 import lishui.example.app.wrapper.PackageManagerWrapper;
 import lishui.example.common.SubFactoryHost;
-import lishui.example.common.SubFactoryImpl;
+import lishui.example.common.SubDependencyImpl;
 import lishui.example.common.util.LogUtils;
 import lishui.example.common.util.PermissionUtils;
 import lishui.example.common.util.ProfileProperties;
@@ -51,7 +51,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
         dependency.mWorkScheduler = new WorkScheduler();
         dependency.mMessagingLoader = new MessagingLoader();
 
-        SubFactoryImpl.init(appContext, dependency);
+        SubDependencyImpl.init(appContext, dependency);
         //dependency.mProfileProperties.init(appContext);
 
         if (PermissionUtils.hasRequiredPermissions()) {

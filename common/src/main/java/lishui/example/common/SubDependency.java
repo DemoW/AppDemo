@@ -7,20 +7,20 @@ import lishui.example.common.util.LogUtils;
 /**
  * Created by lishui.lin on 20-9-29
  */
-public abstract class SubFactory {
-    private static final String TAG = "SubFactory";
+public abstract class SubDependency {
+    private static final String TAG = "SubDependency";
 
-    private static volatile SubFactory sInstance;
+    private static volatile SubDependency sInstance;
     protected static boolean sInitialized;
 
-    public static SubFactory get() {
+    public static SubDependency get() {
         return sInstance;
     }
 
-    protected static void setInstance(final SubFactory factory) {
+    protected static void setInstance(final SubDependency factory) {
         if (!sInitialized) {
             sInstance = factory;
-            LogUtils.d(TAG, "SubFactory setInstance successfully");
+            LogUtils.d(TAG, "SubDependency setInstance successfully");
         }
     }
 

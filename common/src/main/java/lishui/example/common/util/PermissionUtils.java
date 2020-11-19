@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import lishui.example.common.SubFactory;
+import lishui.example.common.SubDependency;
 import lishui.example.common.UiIntents;
 
 /**
@@ -22,7 +22,7 @@ public class PermissionUtils {
         if (Utilities.isAtLeastM()) {
             if (!sPermissions.containsKey(permission)
                     || sPermissions.get(permission) == PackageManager.PERMISSION_DENIED) {
-                final Context context = SubFactory.get().getAppContext();
+                final Context context = SubDependency.get().getAppContext();
                 final int permissionState = context.checkSelfPermission(permission);
                 sPermissions.put(permission, permissionState);
             }

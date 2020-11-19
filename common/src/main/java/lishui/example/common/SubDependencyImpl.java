@@ -7,7 +7,7 @@ import lishui.example.common.util.LogUtils;
 /**
  * Created by lishui.lin on 20-9-29
  */
-public class SubFactoryImpl extends SubFactory {
+public class SubDependencyImpl extends SubDependency {
 
     private static final String TAG = "SubFactoryImpl";
 
@@ -16,13 +16,13 @@ public class SubFactoryImpl extends SubFactory {
     private UiIntents mUIIntents;
 
     public static void init(Context appContext, SubFactoryHost host) {
-        if (sInitialized || SubFactory.get() != null) {
-            LogUtils.i(TAG, "SubFactoryImpl only call once, stop it.");
+        if (sInitialized || SubDependency.get() != null) {
+            LogUtils.i(TAG, "SubDependencyImpl only call once, stop it.");
             return;
         }
 
-        final SubFactoryImpl factory = new SubFactoryImpl();
-        SubFactory.setInstance(factory);
+        final SubDependencyImpl factory = new SubDependencyImpl();
+        SubDependency.setInstance(factory);
         sInitialized = true;
 
         factory.mHost = host;

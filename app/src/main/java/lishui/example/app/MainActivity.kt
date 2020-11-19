@@ -7,8 +7,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import lishui.example.app.base.BaseActivity
+import lishui.example.common.UiIntents
 import lishui.example.common.util.LogUtils
 import java.io.FileDescriptor
 import java.io.PrintWriter
@@ -64,12 +64,7 @@ class MainActivity : BaseActivity() {
             true
         }
         R.id.action_search -> {
-            with(findNavController(R.id.nav_host_fragment)) {
-                if (this.currentDestination?.id == R.id.nav_search_fragment) {
-                    return@with false
-                }
-                navigate(R.id.action_mainFragment_to_searchFragment)
-            }
+            UiIntents.get().launchSearch(this)
             true
         }
         R.id.action_settings -> {
