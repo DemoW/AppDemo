@@ -1,4 +1,4 @@
 rootProject.name = "AppDemo"
 include ':app'
 include ':common'
-include ':player'
+//include ':player'
