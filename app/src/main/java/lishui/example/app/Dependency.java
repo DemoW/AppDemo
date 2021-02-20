@@ -33,7 +33,7 @@ public abstract class Dependency {
     }
 
     public abstract Context getAppContext();
-    public abstract App getApplication();
+    public abstract DemoApp getApplication();
     public abstract ProfileProperties getProfileProperties();
     public abstract AppRepository getAppRepository();
     public abstract WorkScheduler getWorkScheduler();

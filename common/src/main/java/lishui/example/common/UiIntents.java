@@ -17,7 +17,6 @@ public class UiIntents {
 
     private static final String MAIN_CLASS_NAME = "lishui.example.app.ui.MainActivity";
 
-    private static final String ACTION_EXO_PLAYER = "lishui.example.player.action.EXO_PLAYER";
     private static final String ACTION_PERMISSION_CHECKER = "lishui.example.app.action.PERMISSION";
     private static final String ACTION_SEARCH = "lishui.example.app.action.SEARCH";
 
@@ -36,18 +35,6 @@ public class UiIntents {
         final Intent intent = new Intent();
         intent.setComponent(ComponentName.createRelative(
                 context.getPackageName(), MAIN_CLASS_NAME));
-
-        if (!(context instanceof Activity)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        if (isValidIntent(intent)) {
-            context.startActivity(intent);
-        }
-    }
-
-    public void launchExoVideo(Context context) {
-
-        final Intent intent = new Intent(ACTION_EXO_PLAYER);
 
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

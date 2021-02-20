@@ -22,7 +22,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
     private static final String SHARED_PREFERENCES_NAME = "app_demo_sp";
     protected static final int PERMISSION_DEFAULT_TYPE = 0;
 
-    private App mApplication;
+    private DemoApp mApplication;
     private Context mAppContext;
     private ProfileProperties mProfileProperties;
     private AppRepository mAppRepository;
@@ -32,7 +32,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
     private MessagingLoader mMessagingLoader;
     private NetworkManager mNetworkManager;
 
-    public static void register(final Context appContext, final App application) {
+    public static void register(final Context appContext, final DemoApp application) {
         if (sRegistered || Dependency.get() != null) {
             LogUtils.i(TAG, "DependencyImpl only call once, stop it");
             return;
@@ -67,7 +67,7 @@ class DependencyImpl extends Dependency implements SubFactoryHost {
     }
 
     @Override
-    public App getApplication() {
+    public DemoApp getApplication() {
         return mApplication;
     }
 
