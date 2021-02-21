@@ -1,25 +1,23 @@
 package lishui.example.app.messaging
 
+import android.content.Context
 import android.provider.Telephony
-import lishui.example.app.Dependency
+import lishui.example.app.DependencyBackup
 import lishui.example.app.db.entity.ConversationEntity
 import lishui.example.common.util.LogUtils
+import javax.inject.Inject
 
 /**
  * Created by lishui.lin on 20-9-30
  */
-class MessagingLoader {
+class MessagingLoader @Inject constructor(private val context:Context) {
 
     companion object {
         const val TAG = "MessagingLoader"
-        fun get(): MessagingLoader {
-            return Dependency.get().messagingLoader
-        }
     }
 
     fun loadSmsConversations(conversationList: ArrayList<ConversationEntity>) {
-        val app = Dependency.get().appContext
-        app.contentResolver.query(
+        context.contentResolver.query(
             Telephony.Sms.Conversations.CONTENT_URI,
             arrayOf(
                 Telephony.Sms.THREAD_ID,
@@ -58,8 +56,7 @@ class MessagingLoader {
     }
 
     fun loadSmsDataWithThreadId(id: Int, entity: ConversationEntity) {
-        val app = Dependency.get().appContext
-        app.contentResolver.query(
+        context.contentResolver.query(
             Telephony.Sms.CONTENT_URI,
             arrayOf(
                 Telephony.Sms.THREAD_ID,

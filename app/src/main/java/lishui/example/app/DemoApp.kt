@@ -1,16 +1,22 @@
 package lishui.example.app
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import lishui.example.common.util.LogUtils
 
-@HiltAndroidApp
-class DemoApp : Application() {
+
+class DemoApp : Application(), DemoAppComponentFactory.ContextInitializer {
+
+    private var mContextAvailableCallback: DemoAppComponentFactory.ContextAvailableCallback? = null
 
     override fun onCreate() {
         super.onCreate()
-        LogUtils.d(javaClass.simpleName, "init Dependency in app with DependencyImpl.register")
-        DependencyImpl.register(this, this)
+        mContextAvailableCallback?.onContextAvailable(this)
+        DependencyImplBackup.register(this)
+    }
+
+    override fun setContextAvailableCallback(
+        callback: DemoAppComponentFactory.ContextAvailableCallback?
+    ) {
+        mContextAvailableCallback = callback;
     }
 
 }

@@ -1,5 +1,6 @@
 package lishui.example.app
 
+import android.app.AlarmManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,19 +8,20 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import dagger.hilt.android.AndroidEntryPoint
 import lishui.example.app.base.BaseActivity
 import lishui.example.common.UiIntents
 import lishui.example.common.util.LogUtils
 import java.io.FileDescriptor
 import java.io.PrintWriter
+import javax.inject.Inject
 
-@AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity @Inject constructor() : BaseActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
     }
+
+    @Inject lateinit var alarmManager: AlarmManager
 
     private lateinit var navFragmentContainer: FragmentContainerView
 

@@ -1,20 +1,18 @@
 package lishui.example.app.work
 
 import androidx.work.*
-import lishui.example.app.Dependency
+import lishui.example.app.DependencyBackup
 import lishui.example.common.util.LogUtils
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 /**
  * Created by lishui.lin on 20-10-12
  */
-class WorkScheduler {
+class WorkScheduler @Inject constructor() {
 
     companion object {
         const val TAG = "WorkScheduler"
-        fun get(): WorkScheduler {
-            return Dependency.get().workScheduler
-        }
     }
 
     fun runOneTimeWork() {
@@ -43,7 +41,7 @@ class WorkScheduler {
             .build()
 
         //WorkManager.getInstance(Factory.get().appContext).enqueue(oneTimeRequest)
-        WorkManager.getInstance(Dependency.get().appContext)
+        WorkManager.getInstance(DependencyBackup.get().appContext)
             .enqueueUniqueWork(
                 "one-time",
                 ExistingWorkPolicy.KEEP,
@@ -57,7 +55,6 @@ class WorkScheduler {
             1, TimeUnit.HOURS, // repeatInterval (the period cycle)
             15, TimeUnit.MINUTES  // flexInterval
         ).build()
-
 
     }
 }

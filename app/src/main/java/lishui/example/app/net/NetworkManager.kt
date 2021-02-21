@@ -2,7 +2,7 @@ package lishui.example.app.net
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import lishui.example.app.Dependency
+import lishui.example.app.DependencyBackup
 import lishui.example.app.WAN_ANDROID_BASE_URI
 import lishui.example.app.wanandroid.Article
 import lishui.example.app.wanandroid.PageBody
@@ -15,7 +15,7 @@ class NetworkManager {
 
     companion object {
         fun get(): NetworkManager {
-            return Dependency.get().networkManager
+            return DependencyBackup.get().networkManager
         }
     }
 

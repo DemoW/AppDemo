@@ -3,17 +3,16 @@ package lishui.example.app
 import android.content.Context
 import androidx.room.Room
 import lishui.example.app.db.AppDatabase
+import lishui.example.app.db.entity.ConversationEntity
+import lishui.example.app.messaging.MessagingLoader
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by lishui.lin on 20-9-30
  */
-class AppRepository(private val appContext: Context) {
-
-    companion object {
-        fun get(): AppRepository {
-            return Dependency.get().appRepository
-        }
-    }
+@Singleton
+class AppRepository @Inject constructor(appContext: Context) {
 
 //    val MIGRATION_1_2 = object : Migration(1, 2) {
 //        override fun migrate(database: SupportSQLiteDatabase) {
@@ -25,4 +24,12 @@ class AppRepository(private val appContext: Context) {
         appContext,
         AppDatabase::class.java, "app_demo.db"
     ).build()
+
+    private val messagingLoader: MessagingLoader = MessagingLoader(context = appContext)
+
+    fun loadSmsConversations(conversationList: ArrayList<ConversationEntity>) =
+        messagingLoader.loadSmsConversations(conversationList)
+
+    fun loadSmsDataWithThreadId(id: Int, entity: ConversationEntity) =
+        messagingLoader.loadSmsDataWithThreadId(id, entity)
 }
