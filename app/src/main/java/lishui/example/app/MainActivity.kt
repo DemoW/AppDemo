@@ -1,6 +1,5 @@
 package lishui.example.app
 
-import android.app.AlarmManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -20,8 +19,6 @@ class MainActivity @Inject constructor() : BaseActivity() {
     companion object {
         private const val TAG = "MainActivity"
     }
-
-    @Inject lateinit var alarmManager: AlarmManager
 
     private lateinit var navFragmentContainer: FragmentContainerView
 
